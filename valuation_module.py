@@ -1,4 +1,4 @@
-from scoring__utils import score_ratio
+from scoring_utils import score_ratio
 
 PE_INVALID = float('nan')
 PE_RATIO_THRESHOLDS = [

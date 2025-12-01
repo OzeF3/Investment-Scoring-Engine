@@ -1,5 +1,5 @@
 
-from scoring__utils import score_by_thresholds
+from scoring_utils import score_by_thresholds
 
 #creating table with limits and score limits
 GROWTH_THRESHOLDS = [
