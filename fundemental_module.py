@@ -79,9 +79,9 @@ def calculate_fundamental_scores(
     return {
         "Growth_score": g,
         "Profit_score": p,
-        "DEbt_to_Equity_score": d,
+        "Debt_to_Equity_score": d,
         "Free_Cash_Flow_score": f,
-        "Fundamentals_Score": final_score,
+        "Fundamentals_Score (range of 1-100)": final_score,
             }
 
 
