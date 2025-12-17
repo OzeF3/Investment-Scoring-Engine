@@ -1,4 +1,4 @@
-# Investment Scoring Algorithm (V1)
+# Algo-Driven Growth Stock Model (V1)
 
 *A modular multi-factor scoring engine for evaluating technology & growth companies.*
 
