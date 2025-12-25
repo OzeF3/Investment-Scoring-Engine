@@ -1,5 +1,5 @@
 
-from fundemental_module import calculate_fundamental_scores
+from fundamental_module import calculate_fundamental_scores
 from valuation_module import calculate_valuation_scores
 from moat_module import calculate_moat_scores
 
