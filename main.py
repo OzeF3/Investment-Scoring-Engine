@@ -12,7 +12,8 @@ def get_float(prompt) -> float:
             print("Invalid input. PLS try again ")
 
 print("Welcome to the Investment Scoring Algorithm")
-stock = input("PLS ENter a stock/symbol: ")
+stock = input("PLS Enter a stock/symbol: ")
+sector = input("PLS Enter which sector is {stock}'s belong to: ")
 
 ### inputs- soon to be API###
 

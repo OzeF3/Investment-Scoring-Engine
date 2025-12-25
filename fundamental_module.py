@@ -1,5 +1,6 @@
 
 from scoring_utils import score_by_thresholds
+from config import fundamental_weight
 
 #creating table with limits and score limits
 GROWTH_THRESHOLDS = [
