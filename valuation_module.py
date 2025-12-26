@@ -1,4 +1,5 @@
 from scoring_utils import score_ratio
+from config import valuation_weight
 
 PE_INVALID = float('nan')
 PE_RATIO_THRESHOLDS = [
@@ -77,6 +78,7 @@ def valuation_weighted_score(
         eveb:int,
         ps: int,
         pfcf:int,
+        wbs: dict
                             ) -> int:
     """
     Calculates the final valuation score using fixed weights:
@@ -101,6 +103,7 @@ def calculate_valuation_scores(
     sector_ps:float,
     stock_pfcf: float,
     sector_pfcf:float,
+    sector:str,
                               ) -> dict:   
     """
     Core function of the valuation module.
@@ -111,8 +114,9 @@ def calculate_valuation_scores(
     eveb = evebitda_ratio(stock_eveb, sector_eveb)
     ps = ps_ratio(stock_ps, sector_ps)
     pfcf = price_fcf_ratio(stock_pfcf, sector_pfcf)
+    weight_by_sector = weight_by_sector(sector)
 
-    final_score = valuation_weighted_score(pe, fpe, eveb, ps, pfcf)
+    final_score = valuation_weighted_score(pe, fpe, eveb, ps, pfcf, weight_by_sector)
 
     return {
         "pe_score": pe,

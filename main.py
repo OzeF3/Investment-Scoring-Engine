@@ -28,6 +28,7 @@ fundamental_input = {
     "operating_margin": operating_margin,
     "debt_to_equity": debt_to_equity,
     "fcf_margin": fcf_margin,
+    "sector": sector,
                     }
 
 # asking user for valuation inputs: 
@@ -58,6 +59,7 @@ valuation_input = {
     "sector_ps": sector_ps,
     "stock_pfcf": stock_pfcf,
     "sector_pfcf": sector_pfcf,
+    "sector": sector,
                     }
 
 # asking user for moat inputs: 
@@ -82,6 +84,7 @@ moat_input = {
     "gross_margin_list": gross_margin_list,
     "r_and_d_raw": r_and_d_raw,
     "revenue_raw": revenue_raw,
+    "sector": sector,
             }
 
 # running core engine and final score

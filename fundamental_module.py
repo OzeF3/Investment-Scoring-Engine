@@ -49,7 +49,13 @@ def fcf_margin_score(free_cash_flow: float) -> int:
     return score_by_thresholds(free_cash_flow,FCF_MARGIN_THRESHOLDS,FCF_MARGIN_DEFAULT)
 
 
-def fundamental_weighted_score(g: int, p: int, d: int, f: int) -> int:
+def fundamental_weighted_score(
+        g: int,
+        p: int,
+        d: int,
+        f: int,
+        wbs: dict
+                            ) -> int:
     """
     Calculates the final fundamentals score using fixed weights:
     growth - 30%
@@ -65,6 +71,7 @@ def calculate_fundamental_scores(
     profit_pct: float,
     debt_to_equity: float,
     fcf_margin_pct: float,
+    sector: str,
                                     ) -> dict:   
     """
     Core function of the fundamentals module.
@@ -74,8 +81,9 @@ def calculate_fundamental_scores(
     p = profit_score(profit_pct)
     d = der_score(debt_to_equity)
     f = fcf_margin_score(fcf_margin_pct)
+    weight_by_sector = fundamental_weight(sector)
 
-    final_score = fundamental_weighted_score(g, p, d, f)
+    final_score = fundamental_weighted_score(g, p, d, f, weight_by_sector)
 
     return {
         "Growth_score": g,

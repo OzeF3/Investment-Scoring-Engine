@@ -50,7 +50,13 @@ def rnd_revenue_score(rnd: float, revenue:float) -> int:
     r_and_d_ratio = (rnd/revenue) * 100
     return score_by_thresholds(r_and_d_ratio,RND_TO_REVENUE_RATIO_THRESHOLDS,RND_TO_REVENUE_RATIO_DEFAULT)
 
-def moat_weighted_score(roic: int, fcf: int, gm: int, rnd: int) -> int:
+def moat_weighted_score(
+    roic: int,
+    fcf: int,
+    gm: int,
+    rnd: int
+    
+                        ) -> int:
     """
     Calculates the final moat score using fixed weights:
     ROIC            - 40%
