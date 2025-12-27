@@ -1,25 +1,72 @@
 
-
 def fundamental_weight(sector_name: str) -> dict:
     
     SECTOR_WEIGHTS = {
-    "technology": {
+    "Technology": {
         "growth": 0.30,
         "profit": 0.30,
         "debt_to_equity": 0.20,
         "fcf": 0.20
                 },
-    "healthcare": {
+    "Financial services": {
+        "growth": 0.20,
+        "profit": 0.40,
+        "debt_to_equity": 0.30,
+        "fcf": 0.10
+                    },
+    "Healthcare": {
         "growth": 0.25,
         "profit": 0.35,
         "debt_to_equity": 0.20,
         "fcf": 0.20
                     },
-    "financials": {
+    "Consumer cyclical": {
+        "growth": 0.30,
+        "profit": 0.30,
+        "debt_to_equity": 0.20,
+        "fcf": 0.20
+                },
+    "Consumer defensive": {
         "growth": 0.20,
         "profit": 0.40,
         "debt_to_equity": 0.30,
         "fcf": 0.10
+                    },
+    "Communication services": {
+        "growth": 0.25,
+        "profit": 0.35,
+        "debt_to_equity": 0.20,
+        "fcf": 0.20
+                    },
+    "Industrials": {
+        "growth": 0.30,
+        "profit": 0.30,
+        "debt_to_equity": 0.20,
+        "fcf": 0.20
+                },
+    "Energy": {
+        "growth": 0.20,
+        "profit": 0.40,
+        "debt_to_equity": 0.30,
+        "fcf": 0.10
+                    },
+    "Utilities": {
+        "growth": 0.25,
+        "profit": 0.35,
+        "debt_to_equity": 0.20,
+        "fcf": 0.20
+                    },
+    "Basic materials": {
+        "growth": 0.20,
+        "profit": 0.40,
+        "debt_to_equity": 0.30,
+        "fcf": 0.10
+                    },
+    "Real estate": {
+        "growth": 0.25,
+        "profit": 0.35,
+        "debt_to_equity": 0.20,
+        "fcf": 0.20
                     }
                     }
 
@@ -31,26 +78,74 @@ def fundamental_weight(sector_name: str) -> dict:
     
 def valuation_weight(sector_name: str) -> dict:
     SECTOR_WEIGHTS = {
-    "technology": {
+    "Technology": {
         "pe": 0.20,
         "fpe": 0.30,
         "ev_ebitda": 0.20,
         "ps": 0.20,
         "price_fcf": 0.1
                 },
-    "financials": {
+    "Financial services": {
         "pe": 0.25,
         "fpe": 0.30,
         "ev_ebitda": 0.25,
         "ps": 0.10,
         "price_fcf": 0.10
                     },
-    "healthcare": {
+    "Healthcare": {
         "pe": 0.30,
         "fpe": 0.25,
         "ev_ebitda": 0.25,
         "ps": 0.10,
         "price_fcf": 0.10
+                    },
+    "Consumer cyclical": {
+        "growth": 0.30,
+        "profit": 0.30,
+        "debt_to_equity": 0.20,
+        "fcf": 0.20
+                },
+    "Consumer defensive": {
+        "growth": 0.20,
+        "profit": 0.40,
+        "debt_to_equity": 0.30,
+        "fcf": 0.10
+                    },
+    "Communication services": {
+        "growth": 0.25,
+        "profit": 0.35,
+        "debt_to_equity": 0.20,
+        "fcf": 0.20
+                    },
+    "Industrials": {
+        "growth": 0.30,
+        "profit": 0.30,
+        "debt_to_equity": 0.20,
+        "fcf": 0.20
+                },
+    "Energy": {
+        "growth": 0.20,
+        "profit": 0.40,
+        "debt_to_equity": 0.30,
+        "fcf": 0.10
+                    },
+    "Utilities": {
+        "growth": 0.25,
+        "profit": 0.35,
+        "debt_to_equity": 0.20,
+        "fcf": 0.20
+                    },
+    "Basic materials": {
+        "growth": 0.20,
+        "profit": 0.40,
+        "debt_to_equity": 0.30,
+        "fcf": 0.10
+                    },
+    "Real estate": {
+        "growth": 0.25,
+        "profit": 0.35,
+        "debt_to_equity": 0.20,
+        "fcf": 0.20
                     }
                     }
     
@@ -62,23 +157,71 @@ def valuation_weight(sector_name: str) -> dict:
 
 def moat_weight(sector_name: str) -> dict:
     SECTOR_WEIGHTS = {
-    "technology": {
+    "Technology": {
         "roic": 0.35,
         "fcf_5y_g": 0.20,
         "gm_stability": 0.20,
         "rnd_to_rev": 0.25
                 },
-    "financials": {
+    "Financial services": {
         "roic": 0.45,
         "fcf_5y_g": 0.25,
         "gm_stability": 0.25,
         "rnd_to_rev": 0.05
                     },
-    "healthcare": {
+    "Healthcare": {
         "roic": 0.30,
         "fcf_5y_g": 0.15,
         "gm_stability": 0.20,
         "rnd_to_rev": 0.35
+                    },
+    "Consumer cyclical": {
+        "growth": 0.30,
+        "profit": 0.30,
+        "debt_to_equity": 0.20,
+        "fcf": 0.20
+                },
+    "Consumer defensive": {
+        "growth": 0.20,
+        "profit": 0.40,
+        "debt_to_equity": 0.30,
+        "fcf": 0.10
+                    },
+    "Communication services": {
+        "growth": 0.25,
+        "profit": 0.35,
+        "debt_to_equity": 0.20,
+        "fcf": 0.20
+                    },
+    "Industrials": {
+        "growth": 0.30,
+        "profit": 0.30,
+        "debt_to_equity": 0.20,
+        "fcf": 0.20
+                },
+    "Energy": {
+        "growth": 0.20,
+        "profit": 0.40,
+        "debt_to_equity": 0.30,
+        "fcf": 0.10
+                    },
+    "Utilities": {
+        "growth": 0.25,
+        "profit": 0.35,
+        "debt_to_equity": 0.20,
+        "fcf": 0.20
+                    },
+    "Basic materials": {
+        "growth": 0.20,
+        "profit": 0.40,
+        "debt_to_equity": 0.30,
+        "fcf": 0.10
+                    },
+    "Real estate": {
+        "growth": 0.25,
+        "profit": 0.35,
+        "debt_to_equity": 0.20,
+        "fcf": 0.20
                     }
                     }
     
