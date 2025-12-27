@@ -1,5 +1,4 @@
 
-# file will help determine between differnet type of sector and help selidify weighted scores per sector.
 
 def fundamental_weight(sector_name: str) -> dict:
     
