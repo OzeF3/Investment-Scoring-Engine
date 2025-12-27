@@ -56,10 +56,10 @@ def fundamental_weighted_score(
         wbs: dict
                             ) -> int:
 
-    growth_weight = wbs['growth']          
-    profit_weight = wbs['profit']          
-    dte_weight = wbs['debt_to_equity']      
-    fcf_weight = wbs['fcf']                
+    growth_weight = wbs['growth']      
+    profit_weight = wbs['profit']   
+    dte_weight = wbs['debt_to_equity'] 
+    fcf_weight = wbs['fcf']           
 
     weighted_together = (growth_weight * g + profit_weight * p + dte_weight * d + fcf_weight * f)
     return round(weighted_together)

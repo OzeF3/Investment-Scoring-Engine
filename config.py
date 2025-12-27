@@ -41,14 +41,14 @@ def valuation_weight(sector_name: str) -> dict:
                 },
     "financials": {
         "pe": 0.25,
-        "forward_pe": 0.30,
+        "fpe": 0.30,
         "ev_ebitda": 0.25,
         "ps": 0.10,
         "price_fcf": 0.10
                     },
     "healthcare": {
         "pe": 0.30,
-        "forward_pe": 0.25,
+        "fpe": 0.25,
         "ev_ebitda": 0.25,
         "ps": 0.10,
         "price_fcf": 0.10

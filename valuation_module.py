@@ -85,10 +85,22 @@ def valuation_weighted_score(
     fpe_weight = wbs['fpe']
     eveb_weight = wbs['ev_ebitda']
     ps_weight = wbs['ps']
-    pfcf_weight = ['price_fcf']
+    pfcf_weight = wbs['price_fcf']
 
-    weighted_together = (pe_weight * pe + fpe_weight * fpe + eveb_weight * eveb
-                        + ps_weight * ps + pfcf_weight * pfcf)
+    print("pe", type(pe), pe)
+    print("fpe", type(fpe), fpe)
+    print("eveb", type(eveb), eveb)
+    print("ps", type(ps), ps)
+    print("pfcf", type(pfcf), pfcf)
+
+    print("pe_weight", type(pe_weight), pe_weight)
+    print("fpe_weight", type(fpe_weight), fpe_weight)
+    print("eveb_weight", type(eveb_weight), eveb_weight)
+    print("ps_weight", type(ps_weight), ps_weight)
+    print("pfcf_weight", type(pfcf_weight), pfcf_weight)
+
+    weighted_together = (
+        pe_weight * pe + fpe_weight * fpe + eveb_weight * eveb + ps_weight * ps + pfcf_weight * pfcf)
     return round(weighted_together)
 
 def calculate_valuation_scores(
