@@ -100,7 +100,7 @@ def valuation_weight(sector_name: str) -> dict:
         "price_fcf": 0.10
                     },
     "Consumer cyclical": {
-        "growth": 0.30,
+        "gggrowth": 0.30,
         "profit": 0.30,
         "debt_to_equity": 0.20,
         "fcf": 0.20
