@@ -136,7 +136,7 @@ def calculate_valuation_scores(
         "ps_score": ps,
         "price_fcf_score": pfcf,
         "weight_currently_being used": weight_by_sector,
-        "valuation_score": final_score
+        "Valuation_score": final_score
            }
 
     

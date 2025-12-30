@@ -88,6 +88,7 @@ def calculate_fundamental_scores(
         "Profit_score": p,
         "Debt_to_Equity_score": d,
         "Free_Cash_Flow_margin_score": f,
+        "Sector_name": sector_name,
         "weight_currently_being used": weight_by_sector,
         "Fundamentals_Score (range of 1-100)": final_score
             }

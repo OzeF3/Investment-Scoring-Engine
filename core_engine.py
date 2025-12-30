@@ -2,6 +2,7 @@
 from fundamental_module import calculate_fundamental_scores
 from valuation_module import calculate_valuation_scores
 from moat_module import calculate_moat_scores
+from config import final_score_weight
 
 def calculate_all_scores(fundamental_input: dict, valuation_input: dict, moat_input: dict):
 
@@ -63,10 +64,16 @@ def calculate_all_scores(fundamental_input: dict, valuation_input: dict, moat_in
                                         )
     # Extracting final scores from each module
     fundamentals_total = fundamentals_scores["Fundamentals_Score (range of 1-100)"]
-    valuation_total = valuation_scores["valuation_score"]
-    moat_total = moat_scores["moat_score"]
+    valuation_total = valuation_scores["Valuation_score"]
+    moat_total = moat_scores["Moat_score"]
 
-    # weighted final score 
+    # Extracting sector_name
+    SECTOR_NAME = fundamentals_scores["Sector_name"]
+
+    # calling func of final weights
+    dict_of_final_weights = final_score_weight(SECTOR_NAME)
+    print(dict_of_final_weights)
+
     final_score = round(0.33 * fundamentals_total + 0.33 * valuation_total + 0.34 * moat_total)
 
     return {

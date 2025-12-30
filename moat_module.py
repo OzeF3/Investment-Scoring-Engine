@@ -94,5 +94,5 @@ def calculate_moat_scores(
         "fcf_growth_score": fcf,
         "rnd_to_revenue_score": rnd,
         "weight_currently_being used": weight_by_sector,
-        "moat_score": final_score
+        "Moat_score": final_score
             }

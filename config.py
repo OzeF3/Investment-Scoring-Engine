@@ -241,6 +241,33 @@ def moat_weight(sector_name: str) -> dict:
 
 
 #for the total score weighting
-def total_weight(sector_name: str) -> dict:
-    pass
+def final_score_weight(sector_name: str) -> dict:
+
+    FINAL_WEIGHTS = {
+    "Technology": {
+        "f_weight": 0.25,
+        "v_weight": 0.35,
+        "m_weight": 0.40
+                },
+    "Financial Services": {
+        "f_weight": 0.25,
+        "v_weight": 0.35,
+        "m_weight": 0.40
+        
+                    },
+    "Consumer Cyclical": {
+        "f_weight": 0.25,
+        "v_weight": 0.35,
+        "m_weight": 0.40
+                    },
+    "Communication Services": {
+        "f_weight": 0.25,
+        "v_weight": 0.35,
+        "m_weight": 0.40
+                    },
+                    }
+
+    if sector_name not in FINAL_WEIGHTS:
+        raise ValueError(f"Unsupported sector: sector {sector_name} is not defind in the system")
+    return FINAL_WEIGHTS[sector_name]
 
