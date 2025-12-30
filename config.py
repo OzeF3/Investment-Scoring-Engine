@@ -8,64 +8,64 @@ def fundamental_weight(sector_name: str) -> dict:
         "debt_to_equity": 0.20,
         "fcf": 0.20
                 },
-    "Financial services": {
+    "Financial Services": {
         "growth": 0.20,
         "profit": 0.40,
         "debt_to_equity": 0.30,
         "fcf": 0.10
+                    },
+    "Consumer Cyclical": {
+        "growth": 0.40,
+        "profit": 0.30,
+        "debt_to_equity": 0.15,
+        "fcf": 0.15
+                    },
+    "Communication Services": {
+        "growth": 0.30,
+        "profit": 0.25,
+        "debt_to_equity": 0.25,
+        "fcf": 0.20
                     },
     "Healthcare": {
         "growth": 0.25,
         "profit": 0.35,
         "debt_to_equity": 0.20,
         "fcf": 0.20
-                    },
-    "Consumer cyclical": {
-        "growth": 0.40,
-        "profit": 0.30,
-        "debt_to_equity": 0.15,
-        "fcf": 0.15
                 },
-    "Consumer defensive": {
-        "growth": 0.40,
-        "profit": 0.30,
-        "debt_to_equity": 0.20,
-        "fcf": 0.10
-                    },
-    "Communication services": {
-        "growth": 0.30,
-        "profit": 0.25,
-        "debt_to_equity": 0.25,
-        "fcf": 0.20
-                    },
     "Industrials": {
         "growth": 0.35,
         "profit": 0.30,
         "debt_to_equity": 0.20,
         "fcf": 0.15
                 },
+    "Consumer Defensive": {
+        "growth": 0.40,
+        "profit": 0.30,
+        "debt_to_equity": 0.20,
+        "fcf": 0.10
+                    },
     "Energy": {
         "growth": 0.25,
         "profit": 0.40,
         "debt_to_equity": 0.25,
         "fcf": 0.10
                     },
-    "Utilities": {
-        "growth": 0.25,
-        "profit": 0.35,
-        "debt_to_equity": 0.25,
-        "fcf": 0.15
-                    },
-    "Basic materials": {
+    "Basic Materials": {
         "growth": 0.25,
         "profit": 0.40,
         "debt_to_equity": 0.25,
         "fcf": 0.10
                     },
-    "Real estate": {
+    "Real Estate": {
         "growth": 0.20,
         "profit": 0.35,
         "debt_to_equity": 0.30,
+        "fcf": 0.15
+                    },
+    "Utilities": {
+        "growth": 0.25,
+        "profit": 0.35,
+        "debt_to_equity": 0.25,
         "fcf": 0.15
                     }
                     }
@@ -85,7 +85,7 @@ def valuation_weight(sector_name: str) -> dict:
         "ps": 0.20,
         "price_fcf": 0.10
                 },
-    "Financial services": {
+    "Financial Services": {
         "pe": 0.25,
         "fpe": 0.30,
         "ev_ebitda": 0.25,
@@ -99,21 +99,21 @@ def valuation_weight(sector_name: str) -> dict:
         "ps": 0.10,
         "price_fcf": 0.10
                     },
-    "Consumer cyclical": {
+    "Consumer Cyclical": {
         "pe": 0.30,
         "fpe": 0.25,
         "ev_ebitda": 0.20,
         "ps": 0.15,
         "price_fcf": 0.10
                 },
-    "Consumer defensive": {
+    "Consumer Defensive": {
         "pe": 0.30,
         "fpe": 0.25,
         "ev_ebitda": 0.20,
         "ps": 0.15,
         "price_fcf": 0.10
                     },
-    "Communication services": {
+    "Communication Services": {
         "pe": 0.25,
         "fpe": 0.25,
         "ev_ebitda": 0.25,
@@ -141,7 +141,7 @@ def valuation_weight(sector_name: str) -> dict:
         "ps": 0.15,
         "price_fcf": 0.05
                     },
-    "Basic materials": {
+    "Basic Materials": {
         "pe": 0.30,
         "fpe": 0.25,
         "ev_ebitda": 0.25,
@@ -171,7 +171,7 @@ def moat_weight(sector_name: str) -> dict:
         "gm_stability": 0.20,
         "rnd_to_rev": 0.25
                 },
-    "Financial services": {
+    "Financial Services": {
         "roic": 0.45,
         "fcf_5y_g": 0.25,
         "gm_stability": 0.25,
@@ -183,19 +183,19 @@ def moat_weight(sector_name: str) -> dict:
         "gm_stability": 0.20,
         "rnd_to_rev": 0.35
                     },
-    "Consumer cyclical": {
+    "Consumer Cyclical": {
         "roic": 0.30,
         "fcf_5y_g": 0.25,
         "gm_stability": 0.25,
         "rnd_to_rev": 0.20
                 },
-    "Consumer defensive": {
+    "Consumer Defensive": {
         "roic": 0.35,
         "fcf_5y_g": 0.30,
         "gm_stability": 0.20,
         "rnd_to_rev": 0.15
                     },
-    "Communication services": {
+    "Communication Services": {
         "roic": 0.35,
         "fcf_5y_g": 0.25,
         "gm_stability": 0.20,
@@ -219,13 +219,13 @@ def moat_weight(sector_name: str) -> dict:
         "gm_stability": 0.20,
         "rnd_to_rev": 0.20
                     },
-    "Basic materials": {
+    "Basic Materials": {
         "roic": 0.35,
         "fcf_5y_g": 0.25,
         "gm_stability": 0.20,
         "rnd_to_rev": 0.20
                     },
-    "Real estate": {
+    "Real Estate": {
         "roic": 0.40,
         "fcf_5y_g": 0.25,
         "gm_stability": 0.30,
