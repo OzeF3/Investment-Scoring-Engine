@@ -70,7 +70,7 @@ def fundamental_weight(sector_name: str) -> dict:
                     }
                     }
 
-    sector_name = sector_name.lower().strip()
+    sector_name = sector_name.lower().strip().title()
 
     if sector_name not in SECTOR_WEIGHTS:
         raise ValueError(f"Unsupported sector: sector {sector_name} is not defind in the system")
@@ -157,7 +157,7 @@ def valuation_weight(sector_name: str) -> dict:
                     }
                     }
     
-    sector_name = sector_name.lower().strip()
+    sector_name = sector_name.lower().strip().title()
 
     if sector_name not in SECTOR_WEIGHTS:
         raise ValueError(f"Unsupported sector: sector {sector_name} is not defind in the system")
@@ -233,12 +233,11 @@ def moat_weight(sector_name: str) -> dict:
                     }
                     }
     
-    sector_name = sector_name.lower().strip()
+    sector_name = sector_name.lower().strip().title()
 
     if sector_name not in SECTOR_WEIGHTS:
         raise ValueError(f"Unsupported sector: sector {sector_name} is not defind in the system")
     return SECTOR_WEIGHTS[sector_name]
-
 
 #for the total score weighting
 def final_score_weight(sector_name: str) -> dict:
@@ -253,9 +252,18 @@ def final_score_weight(sector_name: str) -> dict:
         "f_weight": 0.25,
         "v_weight": 0.35,
         "m_weight": 0.40
-        
+                    },
+    "Healthcare": {
+        "f_weight": 0.25,
+        "v_weight": 0.35,
+        "m_weight": 0.40
                     },
     "Consumer Cyclical": {
+        "f_weight": 0.25,
+        "v_weight": 0.35,
+        "m_weight": 0.40
+                },
+    "Consumer Defensive": {
         "f_weight": 0.25,
         "v_weight": 0.35,
         "m_weight": 0.40
@@ -265,7 +273,33 @@ def final_score_weight(sector_name: str) -> dict:
         "v_weight": 0.35,
         "m_weight": 0.40
                     },
-                    }
+    "Industrials": {
+        "f_weight": 0.25,
+        "v_weight": 0.35,
+        "m_weight": 0.40
+                },
+    "Energy": {
+        "f_weight": 0.25,
+        "v_weight": 0.35,
+        "m_weight": 0.40
+                    },
+    "Utilities": {
+        "f_weight": 0.25,
+        "v_weight": 0.35,
+        "m_weight": 0.40
+                    },
+    "Basic Materials": {
+        "f_weight": 0.25,
+        "v_weight": 0.35,
+        "m_weight": 0.40
+                    },
+    "Real Estate": {
+        "f_weight": 0.25,
+        "v_weight": 0.35,
+        "m_weight": 0.40
+                    }}
+    
+    sector_name = sector_name.lower().strip().title()
 
     if sector_name not in FINAL_WEIGHTS:
         raise ValueError(f"Unsupported sector: sector {sector_name} is not defind in the system")

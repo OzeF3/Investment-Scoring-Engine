@@ -72,9 +72,11 @@ def calculate_all_scores(fundamental_input: dict, valuation_input: dict, moat_in
 
     # calling func of final weights
     dict_of_final_weights = final_score_weight(SECTOR_NAME)
-    print(dict_of_final_weights)
+    fw = dict_of_final_weights["f_weight"]
+    vw = dict_of_final_weights["v_weight"]
+    mw = dict_of_final_weights["m_weight"]
 
-    final_score = round(0.33 * fundamentals_total + 0.33 * valuation_total + 0.34 * moat_total)
+    final_score = round(fw * fundamentals_total + vw * valuation_total + mw * moat_total)
 
     return {
         "fundamentals": fundamentals_scores,
