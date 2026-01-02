@@ -4,13 +4,30 @@ from valuation_module import calculate_valuation_scores
 from moat_module import calculate_moat_scores
 from config import final_score_weight
 
-def calculate_all_scores(fundamental_input: dict, valuation_input: dict, moat_input: dict):
+from dataclasses import dataclass
 
-    revenue_growth = fundamental_input["revenue_growth"]
-    operating_margin = fundamental_input["operating_margin"]
-    debt_to_equity = fundamental_input["debt_to_equity"]
-    fcf_margin = fundamental_input["fcf_margin"]
-    f_sector_name = fundamental_input["sector"]
+@dataclass
+class Fundamental_input:
+    revenue_growth: float
+    operating_margin: float
+    debt_to_equity: float
+    fcf_margin: float
+    sector: str
+
+    def __post_init__(self):
+        if not isinstance(self.sector, str):
+            raise ValueError("sector must be a string")
+            
+        if self.sector.isdigit():
+            raise ValueError("sector cannot be a number. Please enter a sector name (e.g., technology)")
+        
+def calculate_all_scores(fundamental_input: Fundamental_input, valuation_input: dict, moat_input: dict):
+
+    revenue_growth = fundamental_input.revenue_growth
+    operating_margin = fundamental_input.operating_margin
+    debt_to_equity = fundamental_input.debt_to_equity
+    fcf_margin = fundamental_input.fcf_margin
+    f_sector_name = fundamental_input.sector
 
     fundamentals_scores = calculate_fundamental_scores(
         growth_pct = revenue_growth,

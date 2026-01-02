@@ -1,5 +1,6 @@
 
 from core_engine import calculate_all_scores
+from core_engine import Fundamental_input
 
 #loop that make sure its float and system wont crash
 def get_float(prompt) -> float:
@@ -23,13 +24,14 @@ operating_margin = get_float("Enter stock Operating margin %: ")
 debt_to_equity = get_float("Enter stock Debt to Equity ratio: ")
 fcf_margin = get_float("Enter stock Free Cash Flow Margin %: ")
 
-fundamental_input = {
-    "revenue_growth": revenue_growth,
-    "operating_margin": operating_margin,
-    "debt_to_equity": debt_to_equity,
-    "fcf_margin": fcf_margin,
-    "sector": sector,
-                    }
+fundamental_input = Fundamental_input(
+    revenue_growth=revenue_growth,
+    operating_margin=operating_margin,
+    debt_to_equity=debt_to_equity,
+    fcf_margin=fcf_margin,
+    sector=sector,
+                                    )
+
 
 # asking user for valuation inputs: 
 print("\n--- Valuation inputs (stock vs sector) ---")
