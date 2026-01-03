@@ -32,7 +32,7 @@ class Valuation_input:
 class Moat_input:
     roic_raw_value: float
     fcf_growth_raw: float
-    gross_margin_list: float
+    gross_margin_list: list[float]
     r_and_d_raw: float
     revenue_raw: float
     sector: str
