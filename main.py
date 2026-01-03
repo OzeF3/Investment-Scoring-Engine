@@ -32,7 +32,6 @@ fundamental_input = Fundamental_input(
     sector=sector,
                                     )
 
-
 # asking user for valuation inputs: 
 print("\n--- Valuation inputs (stock vs sector) ---")
 stock_pe = get_float("Enter STOCK P/E: ")
