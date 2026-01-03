@@ -1,6 +1,6 @@
 
 from core_engine import calculate_all_scores
-from core_engine import Fundamental_input
+from core_engine import Fundamental_input, Valuation_input, Moat_input
 
 #loop that make sure its float and system wont crash
 def get_float(prompt) -> float:
@@ -29,7 +29,7 @@ fundamental_input = Fundamental_input(
     operating_margin=operating_margin,
     debt_to_equity=debt_to_equity,
     fcf_margin=fcf_margin,
-    sector=sector,
+    sector=sector
                                     )
 
 # asking user for valuation inputs: 
@@ -49,19 +49,19 @@ sector_ps = get_float("Enter SECTOR Price/Sales: ")
 stock_pfcf = get_float("Enter STOCK Price/Free Cash Flow: ")
 sector_pfcf = get_float("Enter SECTOR Price/Free Cash Flow: ")
 
-valuation_input = {
-    "stock_pe": stock_pe,
-    "sector_pe": sector_pe,
-    "stock_fpe": stock_fpe,
-    "sector_fpe": sector_fpe,
-    "stock_eveb": stock_eveb,
-    "sector_eveb": sector_eveb,
-    "stock_ps": stock_ps,
-    "sector_ps": sector_ps,
-    "stock_pfcf": stock_pfcf,
-    "sector_pfcf": sector_pfcf,
-    "sector": sector,
-                    }
+valuation_input= Valuation_input(
+    stock_pe=stock_pe,
+    sector_pe=sector_pe,
+    stock_fpe=stock_fpe,
+    sector_fpe=sector_fpe,
+    stock_eveb=stock_eveb,
+    sector_eveb=sector_eveb,
+    stock_ps=stock_ps,
+    sector_ps=sector_ps,
+    stock_pfcf=stock_pfcf,
+    sector_pfcf=sector_pfcf,
+    sector=sector
+                                )
 
 # asking user for moat inputs: 
 print("\n--- Moat inputs ---")
@@ -79,14 +79,14 @@ gross_margin_list = [gm1, gm2, gm3, gm4, gm5]
 r_and_d_raw = get_float("Enter total R&D (same units as revenue): ")
 revenue_raw = get_float("Enter total Revenue (same units as R&D): ")
 
-moat_input = {
-    "roic_raw_value": roic_raw_value,
-    "fcf_growth_raw": fcf_growth_raw,
-    "gross_margin_list": gross_margin_list,
-    "r_and_d_raw": r_and_d_raw,
-    "revenue_raw": revenue_raw,
-    "sector": sector,
-            }
+moat_input = Moat_input(
+    roic_raw_value=roic_raw_value,
+    fcf_growth_raw=fcf_growth_raw,
+    gross_margin_list=gross_margin_list,
+    r_and_d_raw=r_and_d_raw,
+    revenue_raw=revenue_raw,
+    sector=sector
+                        )
 
 # running core engine and final score
 scores = calculate_all_scores(fundamental_input, valuation_input, moat_input)

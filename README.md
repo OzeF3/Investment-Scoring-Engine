@@ -57,6 +57,7 @@ python main.py
 ```
 You will be prompted for financial values manually.  
 A future version will pull all values automatically from APIs.
+With API integration, the system will also automatically detect the company’s sector—no manual input required.
 
 ---
 
