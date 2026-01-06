@@ -91,7 +91,7 @@ moat_input = Moat_input(
 # running core engine and final score
 scores = calculate_all_scores(fundamental_input, valuation_input, moat_input)
 
-fundamentals_total = scores["fundamentals"]["Fundamentals_Score"]
+fundamentals_total = scores["fundamentals"]["Fundamentals_score"]
 valuation_total = scores["valuation"]["Valuation_score"]
 moat_total = scores["moat"]["Moat_score"]
 
