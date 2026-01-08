@@ -1,7 +1,7 @@
 
 from fundamental_module import calculate_fundamental_scores
 
-def test_fundamentals_score_in_range():
+def test_fundamentals_score_in_int_range():
 
     result = calculate_fundamental_scores(
         growth_pct=25,
