@@ -9,7 +9,6 @@ def test_fundamentals_score_in_int_range():
         debt_to_equity=1.2,
         fcf_margin_pct=5,
         sector_name="Energy"
-
     )
 
     final_fundamental_score = result["Fundamentals_score"]
