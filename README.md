@@ -2,8 +2,9 @@
 
 A modular, sector-aware **multi-factor investment scoring engine** written in Python.
 The system evaluates public companies using **Fundamental, Valuation, and Moat metrics**, and outputs both **module-level scores** and a **final weighted score (0–100)**.
+An automated scoring engine designed to significantly reduce the time investors spend on research.
 
-This project is designed as a **learning + portfolio project**, with a clean, testable architecture that is ready for future automation via financial data APIs.
+This project is designed as a **portfolio project**, with a clean, testable architecture that is ready for future automation via financial data APIs.
 
 ---
 
