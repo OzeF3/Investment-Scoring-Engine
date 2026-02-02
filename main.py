@@ -2,6 +2,50 @@
 from core_engine import calculate_all_scores
 from core_engine import Fundamental_input, Valuation_input, Moat_input
 
+from company_provider import fetch_company_metadata, DataFetchError
+
+data = None
+ticker = None
+sector = None
+stock_label = None
+
+print("Welcome to the Investment Scoring Engine")
+
+while True:
+    user_ticker = input("Enter stock ticker: (or 'q' to quit) ").strip()
+
+    if user_ticker.lower() in {"q", "quit", "exit"}:
+        print("Goodbye")
+        break
+    try:
+
+        data = fetch_company_metadata(user_ticker)
+
+        ticker = data["ticker"]
+        sector = data.get("sector")
+        stock_label = data.get("company_name") or ticker
+
+        print(f"Ticker: {data['ticker']}")
+        print(f"Company: {data['company_name']}")
+
+        if sector:
+            print(f"Sector: {sector}")
+        else:
+            print("Sector: Not available")
+        break
+
+    except ValueError as e:
+        print(f"Input error: {e}")
+
+    except DataFetchError:
+        print("Ticker not found. Try again")
+    
+    except Exception as e:
+        print(f"Unexpected error: {e}")
+
+if data is None:
+    raise SystemExit(0)
+
 #loop that make sure its float and system wont crash
 def get_float(prompt) -> float:
 
@@ -11,10 +55,6 @@ def get_float(prompt) -> float:
             return float(value)
         except ValueError:
             print("Invalid input. PLS try again ")
-
-print("Welcome to the Investment Scoring Algorithm")
-stock = input("PLS Enter a stock/symbol: ")
-sector = input(f"PLS Enter which sector is {stock}'s belong to: ")
 
 ### inputs- soon to be API###
 
@@ -97,11 +137,11 @@ moat_total = scores["moat"]["Moat_score"]
 
 final_score = scores["final_score"]
 
-print(f"{stock}'s Fundamentals score: {fundamentals_total}")
-print(f"{stock}'s Valuation score: {valuation_total}")
-print(f"{stock}'s Moat score: {moat_total}")
+print(f"{stock_label}'s Fundamentals score: {fundamentals_total}")
+print(f"{stock_label}'s Valuation score: {valuation_total}")
+print(f"{stock_label}'s Moat score: {moat_total}")
 print("-" * 35)
-print(f"TOTAL FINAL SCORE for {stock} is: {final_score}")
+print(f"TOTAL FINAL SCORE for {stock_label} is: {final_score}")
 
 
 

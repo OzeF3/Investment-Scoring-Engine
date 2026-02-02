@@ -148,7 +148,7 @@ def valuation_weight(sector_name: str) -> dict:
         "ps": 0.15,
         "price_fcf": 0.05
                     },
-    "Real estate": {
+    "Real Estate": {
         "pe": 0.30,
         "fpe": 0.25,
         "ev_ebitda": 0.25,
