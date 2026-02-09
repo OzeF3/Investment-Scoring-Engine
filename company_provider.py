@@ -1,6 +1,5 @@
-
 import yfinance as yf
-import contextlib 
+import contextlib
 import io
 
 class DataFetchError(Exception):

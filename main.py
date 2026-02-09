@@ -4,14 +4,12 @@ from core_engine import Fundamental_input, Valuation_input, Moat_input
 
 from company_provider import fetch_company_metadata, DataFetchError
 from fundamental_provider import fetch_fundamental_data
-
+from valuation_provider import fetch_valuation_data
 
 data = None
 ticker = None
 sector = None
 stock_label = None
-revenue_growth_yoy = None
-gross_margin_ttm = None
 
 print("Welcome to the Investment Scoring Engine")
 
@@ -49,24 +47,30 @@ while True:
 
         fundamental_data = fetch_fundamental_data(user_ticker)
 
-        revenue_growth_yoy = fundamental_data.get("revenue_growth_yoy")
-        gross_margin_ttm = fundamental_data.get("gross_margin_ttm")
+        revenue_growth_yoy = fundamental_data["revenuegrowth"]
+        gross_margin_ttm = fundamental_data["operatingmargin"]
+        debt_to_equity = fundamental_data["debttoequity"]
+        free_cash_flow_margin_ttm = fundamental_data["freecashflowmargin"]
 
-        print(revenue_growth_yoy)
-        print(gross_margin_ttm)
+        valuation_data = fetch_valuation_data(user_ticker)
 
-        
+        stock_pe = valuation_data["stockpe"]
+        stock_forward_pe = valuation_data["stockforwardpe"]
+        stock_ev_ebitda_multipe = valuation_data["stockevebitdamultiple"]
+
+        stock_price_to_free_cash_flow_multiple = valuation_data["stockricetofreecashflowmultiple"]
+
         break
+
+    except Exception as e:
+        print("Unexpected error:", repr(e))
+        raise
 
     except ValueError as e:
         print(f"Input error: {e}")
 
     except DataFetchError:
         print("Ticker not found. Try again")
-
-    except fundamentalFetchError as e:
-        print(f"Fundamentals unavailable for {user_ticker.upper()}: {e}")
-        continue
     
     except Exception as e:
         print(f"Unexpected error: {e}")
@@ -74,45 +78,44 @@ while True:
 if data is None:
     raise SystemExit(0)
 
-# asking user for fundamentals inputs: 
-debt_to_equity = get_float("Enter stock Debt to Equity ratio: ")
-fcf_margin = get_float("Enter stock Free Cash Flow Margin %: ")
+print("\n--- Fundamental Metrics ---")
+print(f"Quarterly Revenue Growth (YoY): {revenue_growth_yoy:.2f}%")
+print(f"Operating Margin (TTM): {gross_margin_ttm:.2f}%")
+print(f"Total Debt / Equity (MRQ): {debt_to_equity:.2f}")
+print(f"Free Cash Flow Margin (TTM): {free_cash_flow_margin_ttm:.2f}%")
 
 fundamental_input = Fundamental_input(
     revenue_growth_yoy=revenue_growth_yoy,
     gross_margin_ttm=gross_margin_ttm,
     debt_to_equity=debt_to_equity,
-    fcf_margin=fcf_margin,
+    free_cash_flow_margin_ttm=free_cash_flow_margin_ttm,
     sector=sector
                                     )
 
 # asking user for valuation inputs: 
-print("\n--- Valuation inputs (stock vs sector) ---")
-stock_pe = get_float("Enter STOCK P/E: ")
+print("\n--- Valuation Metrics ---")
+
 sector_pe = get_float("Enter SECTOR P/E: ")
 
-stock_fpe = get_float("Enter STOCK Forward P/E: ")
 sector_fpe = get_float("Enter SECTOR Forward P/E: ")
 
-stock_eveb = get_float("Enter STOCK EV/EBITDA: ")
 sector_eveb = get_float("Enter SECTOR EV/EBITDA: ")
 
 stock_ps = get_float("Enter STOCK Price/Sales: ")
 sector_ps = get_float("Enter SECTOR Price/Sales: ")
 
-stock_pfcf = get_float("Enter STOCK Price/Free Cash Flow: ")
 sector_pfcf = get_float("Enter SECTOR Price/Free Cash Flow: ")
 
 valuation_input= Valuation_input(
     stock_pe=stock_pe,
     sector_pe=sector_pe,
-    stock_fpe=stock_fpe,
+    stock_forward_pe=stock_forward_pe,
     sector_fpe=sector_fpe,
-    stock_eveb=stock_eveb,
+    stock_ev_ebitda_multipe=stock_ev_ebitda_multipe,
     sector_eveb=sector_eveb,
     stock_ps=stock_ps,
     sector_ps=sector_ps,
-    stock_pfcf=stock_pfcf,
+    stock_price_to_free_cash_flow_multiple=stock_price_to_free_cash_flow_multiple,
     sector_pfcf=sector_pfcf,
     sector=sector
                                 )

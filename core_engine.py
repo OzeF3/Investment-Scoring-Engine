@@ -8,23 +8,23 @@ from dataclasses import dataclass
 
 @dataclass
 class Fundamental_input:
-    quarterly_revenue_growth_yoy: float
-    operating_margin_ttm: float
-    total_debt_to_equity_mrq: float
-    free_cash_flow_margin: float
+    revenue_growth_yoy: float
+    gross_margin_ttm: float
+    debt_to_equity: float
+    free_cash_flow_margin_ttm: float
     sector: str
 
 @dataclass
 class Valuation_input:
     stock_pe : float
     sector_pe: float
-    stock_fpe: float
+    stock_forward_pe: float
     sector_fpe: float
-    stock_eveb: float
+    stock_ev_ebitda_multipe: float
     sector_eveb: float
     stock_ps: float
     sector_ps: float
-    stock_pfcf: float
+    stock_price_to_free_cash_flow_multiple: float
     sector_pfcf: float
     sector: str
 
@@ -43,43 +43,42 @@ def calculate_all_scores(
         moat_input: Moat_input
                         ):
 
-    quarterly_revenue_growth_yoy = fundamental_input.quarterly_revenue_growth_yoy
-    operating_margin_ttm = fundamental_input.operating_margin_ttm
-    total_debt_to_equity_mrq = fundamental_input.total_debt_to_equity_mrq
-    free_cash_flow_margin = fundamental_input.free_cash_flow_margin
+    revenue_growth_yoy = fundamental_input.revenue_growth_yoy
+    gross_margin_ttm = fundamental_input.gross_margin_ttm
+    debt_to_equity = fundamental_input.debt_to_equity
+    free_cash_flow_margin_ttm = fundamental_input.free_cash_flow_margin_ttm
     f_sector_name = fundamental_input.sector
 
     fundamentals_scores = calculate_fundamental_scores(
-        quarterly_revenue_growth_yoy = quarterly_revenue_growth_yoy,
-        gross_margin_ttm = operating_margin_ttm,
-        debt_to_equity = total_debt_to_equity_mrq,
-        fcf_margin_pct = free_cash_flow_margin,
+        revenue_growth_yoy = revenue_growth_yoy,
+        gross_margin_ttm = gross_margin_ttm,
+        debt_to_equity = debt_to_equity,
+        free_cash_flow_margin_ttm = free_cash_flow_margin_ttm,
         sector_name = f_sector_name
                                                         )
 
-
     stock_pe = valuation_input.stock_pe
     sector_pe = valuation_input.sector_pe
-    stock_fpe = valuation_input.stock_fpe
+    stock_forward_pe = valuation_input.stock_forward_pe
     sector_fpe = valuation_input.sector_fpe
-    stock_eveb = valuation_input.stock_eveb
+    stock_ev_ebitda_multipe = valuation_input.stock_ev_ebitda_multipe
     sector_eveb = valuation_input.sector_eveb
     stock_ps = valuation_input.stock_ps
     sector_ps = valuation_input.sector_ps
-    stock_pfcf = valuation_input.stock_pfcf
+    stock_price_to_free_cash_flow_multiple = valuation_input.stock_price_to_free_cash_flow_multiple
     sector_pfcf = valuation_input.sector_pfcf
     v_sector_name = valuation_input.sector
 
     valuation_scores = calculate_valuation_scores(
         stock_pe = stock_pe,
         sector_pe = sector_pe,
-        stock_fpe = stock_fpe,
+        stock_forward_pe = stock_forward_pe,
         sector_fpe = sector_fpe,
-        stock_eveb = stock_eveb,
+        stock_ev_ebitda_multipe = stock_ev_ebitda_multipe,
         sector_eveb = sector_eveb,
         stock_ps = stock_ps,
         sector_ps = sector_ps,
-        stock_pfcf = stock_pfcf,
+        stock_price_to_free_cash_flow_multiple = stock_price_to_free_cash_flow_multiple,
         sector_pfcf = sector_pfcf,
         sector_name = v_sector_name
                                                 )

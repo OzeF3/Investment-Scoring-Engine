@@ -45,8 +45,8 @@ def gross_margin_ttm_score(gross_margin_ttm: float) -> int:
 def dte_score(debt_to_equity: float) -> int:
     return score_by_thresholds(debt_to_equity, DTE_THRESHOLDS, DTE_DEFAULT)
 
-def fcf_margin_score(fcf_margin_pct: float) -> int:
-    return score_by_thresholds(fcf_margin_pct, FCF_MARGIN_THRESHOLDS, FCF_MARGIN_DEFAULT)
+def fcf_margin_score(free_cash_flow_margin_ttm: float) -> int:
+    return score_by_thresholds(free_cash_flow_margin_ttm, FCF_MARGIN_THRESHOLDS, FCF_MARGIN_DEFAULT)
 
 def fundamental_weighted_score(
         g: int,
@@ -68,7 +68,7 @@ def calculate_fundamental_scores(
     revenue_growth_yoy: float,
     gross_margin_ttm: float,
     debt_to_equity: float,
-    fcf_margin_pct: float,
+    free_cash_flow_margin_ttm: float,
     sector_name: str
                                     ) -> dict:   
     """
@@ -78,7 +78,7 @@ def calculate_fundamental_scores(
     g = revenue_growth_yoy_score(revenue_growth_yoy)
     p = gross_margin_ttm_score(gross_margin_ttm)
     d = dte_score(debt_to_equity)
-    f = fcf_margin_score(fcf_margin_pct)
+    f = fcf_margin_score(free_cash_flow_margin_ttm)
     weight_by_sector = fundamental_weight(sector_name)
 
     final_score = fundamental_weighted_score(g, p, d, f, weight_by_sector)
