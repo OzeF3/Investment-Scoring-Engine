@@ -5,6 +5,8 @@ from core_engine import Fundamental_input, Valuation_input, Moat_input
 from company_provider import fetch_company_metadata, DataFetchError
 from fundamental_provider import fetch_fundamental_data
 from valuation_provider import fetch_stock_valuation_data
+from valuation_provider import fetch_sector_valuation_data
+
 
 data = None
 ticker = None
@@ -45,6 +47,7 @@ while True:
         else:
             print("Sector: Not available")
 
+        #getting fundamental data for ticker:
         fundamental_data = fetch_fundamental_data(user_ticker)
 
         revenue_growth_yoy = fundamental_data["revenuegrowth"]
@@ -52,13 +55,22 @@ while True:
         debt_to_equity = fundamental_data["debttoequity"]
         free_cash_flow_margin_ttm = fundamental_data["freecashflowmargin"]
 
-        valuation_data = fetch_stock_valuation_data(user_ticker)
+        #getting stock valuation data for ticker:
+        stock_valuation_data = fetch_stock_valuation_data(user_ticker)
 
-        stock_pe = valuation_data["stockpe"]
-        stock_forward_pe = valuation_data["stockforwardpe"]
-        stock_ev_ebitda_multipe = valuation_data["stockevebitdamultiple"]
+        stock_pe = stock_valuation_data["stockpe"]
+        stock_forward_pe = stock_valuation_data["stockforwardpe"]
+        stock_ev_ebitda_multipe = stock_valuation_data["stockevebitdamultiple"]
 
-        stock_price_to_free_cash_flow_multiple = valuation_data["stockricetofreecashflowmultiple"]
+        stock_price_to_free_cash_flow_multiple = stock_valuation_data["stockpricetofreecashflowmultiple"]
+
+        #getting sector valuation data for ticker:
+        sector_valuation_data = fetch_sector_valuation_data(sector)
+
+        sector_median_pe = sector_valuation_data["sector_median_pe"]
+        sector_median_forward_pe = sector_valuation_data["sector_median_forward_pe"]
+        sector_median_ev_ebitda = sector_valuation_data["sector_median_ev_ebitda"]
+        sector_median_price_to_fcf = sector_valuation_data["sector_median_price_to_fcf"]
 
         break
 
@@ -95,31 +107,22 @@ fundamental_input = Fundamental_input(
 # asking user for valuation inputs: 
 print("\n--- Valuation Metrics ---")
 
-sector_pe = get_float("Enter SECTOR P/E: ")
-
-sector_fpe = get_float("Enter SECTOR Forward P/E: ")
-
-sector_eveb = get_float("Enter SECTOR EV/EBITDA: ")
-
 stock_ps = get_float("Enter STOCK Price/Sales: ")
 sector_ps = get_float("Enter SECTOR Price/Sales: ")
 
-sector_pfcf = get_float("Enter SECTOR Price/Free Cash Flow: ")
-
 valuation_input= Valuation_input(
     stock_pe=stock_pe,
-    sector_pe=sector_pe,
+    sector_median_pe=sector_median_pe,
     stock_forward_pe=stock_forward_pe,
-    sector_fpe=sector_fpe,
+    sector_median_forward_pe=sector_median_forward_pe,
     stock_ev_ebitda_multipe=stock_ev_ebitda_multipe,
-    sector_eveb=sector_eveb,
+    sector_median_ev_ebitda=sector_median_ev_ebitda,
     stock_ps=stock_ps,
     sector_ps=sector_ps,
     stock_price_to_free_cash_flow_multiple=stock_price_to_free_cash_flow_multiple,
-    sector_pfcf=sector_pfcf,
+    sector_median_price_to_fcf=sector_median_price_to_fcf,
     sector=sector
                                 )
-
 # asking user for moat inputs: 
 print("\n--- Moat inputs ---")
 roic_raw_value = get_float("Enter ROIC 5Y average %: ")

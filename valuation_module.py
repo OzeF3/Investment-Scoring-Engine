@@ -57,20 +57,20 @@ PFCF_RATIO_THRESHOLDS = [
 PFCF_RATIO_DEFAULT = 5   
 
 #specific function that sends info to the generic function in order to help it find score
-def pe_ratio(stock_pe: float, sector_pe:float) -> int:
-    return score_ratio(stock_pe, sector_pe, PE_RATIO_THRESHOLDS, PE_RATIO_DEFAULT )
+def pe_ratio(stock_pe: float, sector_median_pe:float) -> int:
+    return score_ratio(stock_pe, sector_median_pe, PE_RATIO_THRESHOLDS, PE_RATIO_DEFAULT )
 
-def forward_pe_ratio(stock_forward_pe: float, sector_f_pe:float) -> int:
-    return score_ratio(stock_forward_pe, sector_f_pe, F_PE_RATIO_THRESHOLDS, F_PE_DEFAULT)
+def forward_pe_ratio(stock_forward_pe: float, sector_median_forward_pe:float) -> int:
+    return score_ratio(stock_forward_pe, sector_median_forward_pe, F_PE_RATIO_THRESHOLDS, F_PE_DEFAULT)
 
-def evebitda_ratio(stock_ev_ebitda_multipe:float, sector_eveb:float) -> int:
-    return score_ratio(stock_ev_ebitda_multipe, sector_eveb, EVEBITDA_RATIO_THRESHOLDS, EVEBITDA_RATIO_DEFAULT)
+def evebitda_ratio(stock_ev_ebitda_multipe:float, sector_median_ev_ebitda:float) -> int:
+    return score_ratio(stock_ev_ebitda_multipe, sector_median_ev_ebitda, EVEBITDA_RATIO_THRESHOLDS, EVEBITDA_RATIO_DEFAULT)
 
 def ps_ratio(stock_ps:float, sector_ps: float) -> int:
     return score_ratio(stock_ps, sector_ps, PS_RATIO_THRESHOLDS, PS_RATIO_DEFAULT)
 
-def price_fcf_ratio(stock_price_to_free_cash_flow_multiple:float, sector_pfcf: float) -> int:
-    return score_ratio(stock_price_to_free_cash_flow_multiple, sector_pfcf, PFCF_RATIO_THRESHOLDS, PFCF_RATIO_DEFAULT)
+def price_fcf_ratio(stock_price_to_free_cash_flow_multiple:float, sector_median_price_to_fcf: float) -> int:
+    return score_ratio(stock_price_to_free_cash_flow_multiple, sector_median_price_to_fcf, PFCF_RATIO_THRESHOLDS, PFCF_RATIO_DEFAULT)
 
 def valuation_weighted_score(
         pe:int,
@@ -93,26 +93,26 @@ def valuation_weighted_score(
 
 def calculate_valuation_scores(
     stock_pe: float,
-    sector_pe: float,
+    sector_median_pe: float,
     stock_forward_pe: float,
-    sector_fpe:float,
+    sector_median_forward_pe:float,
     stock_ev_ebitda_multipe:float,
-    sector_eveb: float,
+    sector_median_ev_ebitda: float,
     stock_ps: float,
     sector_ps:float,
     stock_price_to_free_cash_flow_multiple: float,
-    sector_pfcf:float,
+    sector_median_price_to_fcf:float,
     sector_name:str,
                               ) -> dict:   
     """
     Core function of the valuation module.
     Gets raw inputs and returns all scores + final valuation_score.
     """
-    pe = pe_ratio(stock_pe, sector_pe)
-    fpe = forward_pe_ratio(stock_forward_pe, sector_fpe)
-    eveb = evebitda_ratio(stock_ev_ebitda_multipe, sector_eveb)
+    pe = pe_ratio(stock_pe, sector_median_pe)
+    fpe = forward_pe_ratio(stock_forward_pe, sector_median_forward_pe)
+    eveb = evebitda_ratio(stock_ev_ebitda_multipe, sector_median_ev_ebitda)
     ps = ps_ratio(stock_ps, sector_ps)
-    pfcf = price_fcf_ratio(stock_price_to_free_cash_flow_multiple, sector_pfcf)
+    pfcf = price_fcf_ratio(stock_price_to_free_cash_flow_multiple, sector_median_price_to_fcf)
     weight_by_sector = valuation_weight(sector_name)
 
     final_score = valuation_weighted_score(pe, fpe, eveb, ps, pfcf, weight_by_sector)

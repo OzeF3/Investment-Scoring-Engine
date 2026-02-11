@@ -1,0 +1,130 @@
+{
+  "quoteSummary": {
+    "result": [
+      {
+        "financialData": {
+          "maxAge": 86400,
+          "currentPrice": {
+            "raw": 226.61,
+            "fmt": "226.61"
+          },
+          "targetHighPrice": {
+            "raw": 325,
+            "fmt": "325.00"
+          },
+          "targetLowPrice": {
+            "raw": 200,
+            "fmt": "200.00"
+          },
+          "targetMeanPrice": {
+            "raw": 274.41934,
+            "fmt": "274.42"
+          },
+          "targetMedianPrice": {
+            "raw": 280,
+            "fmt": "280.00"
+          },
+          "recommendationMean": {
+            "raw": 1.61111,
+            "fmt": "1.61"
+          },
+          "recommendationKey": "buy",
+          "numberOfAnalystOpinions": {
+            "raw": 31,
+            "fmt": "31",
+            "longFmt": "31"
+          },
+          "totalCash": {
+            "raw": 6180440064,
+            "fmt": "6.18B",
+            "longFmt": "6,180,440,064"
+          },
+          "totalCashPerShare": {
+            "raw": 4.949,
+            "fmt": "4.95"
+          },
+          "ebitda": {
+            "raw": 7343528960,
+            "fmt": "7.34B",
+            "longFmt": "7,343,528,960"
+          },
+          "totalDebt": {
+            "raw": 4483747840,
+            "fmt": "4.48B",
+            "longFmt": "4,483,747,840"
+          },
+          "quickRatio": {
+            "raw": 1.557,
+            "fmt": "1.56"
+          },
+          "currentRatio": {
+            "raw": 2.256,
+            "fmt": "2.26"
+          },
+          "totalRevenue": {
+            "raw": 20560531456,
+            "fmt": "20.56B",
+            "longFmt": "20,560,531,456"
+          },
+          "debtToEquity": {
+            "raw": 44.195,
+            "fmt": "44.19%"
+          },
+          "revenuePerShare": {
+            "raw": 16.198,
+            "fmt": "16.20"
+          },
+          "returnOnAssets": {
+            "raw": 0.21047,
+            "fmt": "21.05%"
+          },
+          "returnOnEquity": {
+            "raw": 0.65565,
+            "fmt": "65.57%"
+          },
+          "grossProfits": {
+            "raw": 10239435776,
+            "fmt": "10.24B",
+            "longFmt": "10,239,435,776"
+          },
+          "freeCashflow": {
+            "raw": 4816949760,
+            "fmt": "4.82B",
+            "longFmt": "4,816,949,760"
+          },
+          "operatingCashflow": {
+            "raw": 7121860096,
+            "fmt": "7.12B",
+            "longFmt": "7,121,860,096"
+          },
+          "earningsGrowth": {
+            "raw": 0.37,
+            "fmt": "37.00%"
+          },
+          "revenueGrowth": {
+            "raw": 0.221,
+            "fmt": "22.10%"
+          },
+          "grossMargins": {
+            "raw": 0.49800998,
+            "fmt": "49.80%"
+          },
+          "ebitdaMargins": {
+            "raw": 0.35717,
+            "fmt": "35.72%"
+          },
+          "operatingMargins": {
+            "raw": 0.33868998,
+            "fmt": "33.87%"
+          },
+          "profitMargins": {
+            "raw": 0.3022,
+            "fmt": "30.22%"
+          },
+          "financialCurrency": "USD"
+        }
+      }
+    ],
+    "error": null
+  }
+}

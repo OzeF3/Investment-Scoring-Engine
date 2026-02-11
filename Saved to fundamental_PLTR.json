@@ -5,8 +5,8 @@
         "financialData": {
           "maxAge": 86400,
           "currentPrice": {
-            "raw": 138.89,
-            "fmt": "138.89"
+            "raw": 139.51,
+            "fmt": "139.51"
           },
           "targetHighPrice": {
             "raw": 260,
@@ -25,8 +25,8 @@
             "fmt": "196.50"
           },
           "recommendationMean": {
-            "raw": 2.40741,
-            "fmt": "2.41"
+            "raw": 2.33333,
+            "fmt": "2.33"
           },
           "recommendationKey": "buy",
           "numberOfAnalystOpinions": {

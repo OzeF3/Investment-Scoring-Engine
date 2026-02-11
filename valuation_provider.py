@@ -1,5 +1,9 @@
 import requests
 import json
+import pandas as pd
+import os
+import statistics
+
 
 def fetch_stock_valuation_data(ticker: str) -> dict:
 
@@ -62,19 +66,95 @@ def fetch_stock_valuation_data(ticker: str) -> dict:
         "stockforwardpe": stock_forward_pe,
         "stockevebitdamultiple": ev_ebitda_multiple,
         
-        "stockricetofreecashflowmultiple": stock_price_to_free_cash_flow_multiple
+        "stockpricetofreecashflowmultiple": stock_price_to_free_cash_flow_multiple
     }
 
+def calculate_sector_median(sector_metrics: dict, metric_name: str):
+    values = [
+        data[metric_name]
+        for data in sector_metrics.values()
+        if data.get(metric_name) is not None
+    ]
+    return statistics.median(values)
+
+def fetch_sector_valuation_data(sector: str,):
+
+    #creating dict that connect sector name to sector file name
+    SECTOR_FILE_MAP = {
+        "Materials": "holdings-daily-us-en-xlb.xlsx",
+        "Communication Services": "holdings-daily-us-en-xlc.xlsx",
+        "Energy": "holdings-daily-us-en-xle.xlsx",
+        "Financials": "holdings-daily-us-en-xlf.xlsx",
+        "Industrials": "holdings-daily-us-en-xli.xlsx",
+        "Technology": "holdings-daily-us-en-xlk.xlsx",
+        "Consumer Staples": "holdings-daily-us-en-xlp.xlsx",
+        "Real Estate": "holdings-daily-us-en-xlre.xlsx",
+        "Utilities": "holdings-daily-us-en-xlu.xlsx",
+        "Health Care": "holdings-daily-us-en-xlv.xlsx",
+        "Consumer Discretionary": "holdings-daily-us-en-xly.xlsx",
+    }
+
+    #using the dict to find the right file name
+    file_name = SECTOR_FILE_MAP.get(sector)
+
+    #if file name=None -> raise Error
+    if not file_name:
+        raise ValueError(f"No benchmark file found for sector: {sector}")
+    
+    #creating full path using 'os'
+    file_path = os.path.join("sector_reports_10-2-26", file_name)
+
+    df_raw = pd.read_excel(file_path, skiprows=3)
+
+    header = df_raw.iloc[0].tolist()
+    df = df_raw.iloc[1:].copy()
+    df.columns = header
+
+    tickers = df["Ticker"].astype(str).str.strip().head(10).tolist()
 
 
-#     from pathlib import Path
+    sector_metrics = {}
+    for ticker in tickers:
+        try:
+            metrics = fetch_stock_valuation_data(ticker)  
+            sector_metrics[ticker] = metrics
+        except Exception as e:
+            print(f"Failed to fetch data for {ticker}: {e}")
 
-# BASE_DIR = Path(__file__).resolve().parent  # הקובץ שבו הקוד הזה נמצא
-# BENCH_DIR = BASE_DIR / "sector_benchmarks"
+    sector_median_pe = calculate_sector_median(sector_metrics, "stockpe")
+    sector_median_forward_pe = calculate_sector_median(sector_metrics, "stockforwardpe")
+    sector_median_ev_ebitda = calculate_sector_median(sector_metrics, "stockevebitdamultiple")
+    #add after i fugure out P/S RATIO
+    #sector_median_price_to_sales = calculate_sector_median(sector_metrics, "price_to_sales")
+    sector_median_price_to_fcf = calculate_sector_median(sector_metrics, "stockpricetofreecashflowmultiple")
 
-# SECTOR_TO_FILE = {
-#     "Technology": BENCH_DIR / "holdings-daily-us-en-xlk.xlsx",
-#     "Healthcare": BENCH_DIR / "holdings-daily-us-en-xlv.xlsx",
-#     "Financial Services": BENCH_DIR / "holdings-daily-us-en-xlf.xlsx",
-#     # ...
-# }
+    print("\n--- Sector Valuation Medians ---")
+    print(f"Sector Median P/E: {sector_median_pe:.2f}")
+    print(f"Sector Median Forward P/E: {sector_median_forward_pe:.2f}")
+    print(f"Sector Median EV/EBITDA: {sector_median_ev_ebitda:.2f}")
+    print(f"Sector Median Price/FCF: {sector_median_price_to_fcf:.2f}")
+
+    return {
+        "sector_median_pe": sector_median_pe,
+        "sector_median_forward_pe": sector_median_forward_pe,
+        "sector_median_ev_ebitda": sector_median_ev_ebitda,
+        
+        "sector_median_price_to_fcf": sector_median_price_to_fcf
+    }
+
+    
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+    

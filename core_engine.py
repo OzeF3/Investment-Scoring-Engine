@@ -17,15 +17,15 @@ class Fundamental_input:
 @dataclass
 class Valuation_input:
     stock_pe : float
-    sector_pe: float
+    sector_median_pe: float
     stock_forward_pe: float
-    sector_fpe: float
+    sector_median_forward_pe: float
     stock_ev_ebitda_multipe: float
-    sector_eveb: float
+    sector_median_ev_ebitda: float
     stock_ps: float
     sector_ps: float
     stock_price_to_free_cash_flow_multiple: float
-    sector_pfcf: float
+    sector_median_price_to_fcf: float
     sector: str
 
 @dataclass
@@ -58,28 +58,28 @@ def calculate_all_scores(
                                                         )
 
     stock_pe = valuation_input.stock_pe
-    sector_pe = valuation_input.sector_pe
+    sector_median_pe = valuation_input.sector_median_pe
     stock_forward_pe = valuation_input.stock_forward_pe
-    sector_fpe = valuation_input.sector_fpe
+    sector_median_forward_pe = valuation_input.sector_median_forward_pe
     stock_ev_ebitda_multipe = valuation_input.stock_ev_ebitda_multipe
-    sector_eveb = valuation_input.sector_eveb
+    sector_median_ev_ebitda = valuation_input.sector_median_ev_ebitda
     stock_ps = valuation_input.stock_ps
     sector_ps = valuation_input.sector_ps
     stock_price_to_free_cash_flow_multiple = valuation_input.stock_price_to_free_cash_flow_multiple
-    sector_pfcf = valuation_input.sector_pfcf
+    sector_median_price_to_fcf = valuation_input.sector_median_price_to_fcf
     v_sector_name = valuation_input.sector
 
     valuation_scores = calculate_valuation_scores(
         stock_pe = stock_pe,
-        sector_pe = sector_pe,
+        sector_median_pe = sector_median_pe,
         stock_forward_pe = stock_forward_pe,
-        sector_fpe = sector_fpe,
+        sector_median_forward_pe = sector_median_forward_pe,
         stock_ev_ebitda_multipe = stock_ev_ebitda_multipe,
-        sector_eveb = sector_eveb,
+        sector_median_ev_ebitda = sector_median_ev_ebitda,
         stock_ps = stock_ps,
         sector_ps = sector_ps,
         stock_price_to_free_cash_flow_multiple = stock_price_to_free_cash_flow_multiple,
-        sector_pfcf = sector_pfcf,
+        sector_median_price_to_fcf = sector_median_price_to_fcf,
         sector_name = v_sector_name
                                                 )
 
