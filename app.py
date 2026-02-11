@@ -104,11 +104,15 @@ fundamental_input = Fundamental_input(
     sector=sector
                                     )
 
-# asking user for valuation inputs: 
 print("\n--- Valuation Metrics ---")
 
+print("\n--- Sector Valuation Medians ---")
+print(f"Sector Median P/E: {sector_median_pe:.2f}")
+print(f"Sector Median Forward P/E: {sector_median_forward_pe:.2f}")
+print(f"Sector Median EV/EBITDA: {sector_median_ev_ebitda:.2f}")
 stock_ps = get_float("Enter STOCK Price/Sales: ")
 sector_ps = get_float("Enter SECTOR Price/Sales: ")
+print(f"Sector Median Price/FCF: {sector_median_price_to_fcf:.2f}")
 
 valuation_input= Valuation_input(
     stock_pe=stock_pe,

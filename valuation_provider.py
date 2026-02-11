@@ -81,17 +81,17 @@ def fetch_sector_valuation_data(sector: str,):
 
     #creating dict that connect sector name to sector file name
     SECTOR_FILE_MAP = {
-        "Materials": "holdings-daily-us-en-xlb.xlsx",
+        "Basic Materials": "holdings-daily-us-en-xlb.xlsx",
         "Communication Services": "holdings-daily-us-en-xlc.xlsx",
         "Energy": "holdings-daily-us-en-xle.xlsx",
-        "Financials": "holdings-daily-us-en-xlf.xlsx",
+        "Financial Services": "holdings-daily-us-en-xlf.xlsx",
         "Industrials": "holdings-daily-us-en-xli.xlsx",
         "Technology": "holdings-daily-us-en-xlk.xlsx",
-        "Consumer Staples": "holdings-daily-us-en-xlp.xlsx",
+        "Consumer Defensive": "holdings-daily-us-en-xlp.xlsx",
         "Real Estate": "holdings-daily-us-en-xlre.xlsx",
         "Utilities": "holdings-daily-us-en-xlu.xlsx",
-        "Health Care": "holdings-daily-us-en-xlv.xlsx",
-        "Consumer Discretionary": "holdings-daily-us-en-xly.xlsx",
+        "Healthcare": "holdings-daily-us-en-xlv.xlsx",
+        "Consumer Cyclical": "holdings-daily-us-en-xly.xlsx",
     }
 
     #using the dict to find the right file name
@@ -110,7 +110,7 @@ def fetch_sector_valuation_data(sector: str,):
     df = df_raw.iloc[1:].copy()
     df.columns = header
 
-    tickers = df["Ticker"].astype(str).str.strip().head(10).tolist()
+    tickers = df["Ticker"].astype(str).str.strip().head(3).tolist()
 
 
     sector_metrics = {}
@@ -127,12 +127,6 @@ def fetch_sector_valuation_data(sector: str,):
     #add after i fugure out P/S RATIO
     #sector_median_price_to_sales = calculate_sector_median(sector_metrics, "price_to_sales")
     sector_median_price_to_fcf = calculate_sector_median(sector_metrics, "stockpricetofreecashflowmultiple")
-
-    print("\n--- Sector Valuation Medians ---")
-    print(f"Sector Median P/E: {sector_median_pe:.2f}")
-    print(f"Sector Median Forward P/E: {sector_median_forward_pe:.2f}")
-    print(f"Sector Median EV/EBITDA: {sector_median_ev_ebitda:.2f}")
-    print(f"Sector Median Price/FCF: {sector_median_price_to_fcf:.2f}")
 
     return {
         "sector_median_pe": sector_median_pe,
