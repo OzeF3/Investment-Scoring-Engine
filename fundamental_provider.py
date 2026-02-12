@@ -1,5 +1,9 @@
 import requests
 import json
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
 
 def fetch_fundamental_data(ticker: str) -> dict:
 
@@ -11,7 +15,7 @@ def fetch_fundamental_data(ticker: str) -> dict:
     querystring = {"region":"US","symbol":clean_ticker}
 
     headers = {
-        "x-rapidapi-key": "ac7d1c4b19mshe08636b12ca178bp1254e4jsn916ba406437e",
+        "x-rapidapi-key": os.getenv("API_FUNDAMENTAL_ONE"),
         "x-rapidapi-host": "yahoo-finance166.p.rapidapi.com"
     }
 
@@ -19,7 +23,10 @@ def fetch_fundamental_data(ticker: str) -> dict:
 
     data = response.json()   
 
-    with open(f"Saved to fundamental_{clean_ticker}.json", "w", encoding="utf-8") as f:
+    os.makedirs("data_reports", exist_ok=True)
+
+    file_path = f"data_reports/fundamental_{clean_ticker}.json"
+    with open(file_path, "w", encoding="utf-8") as f:
         json.dump(data, f, indent=2)
 
     #Quarterly Revenue Growth (yoy)% = ( (New Quarter Revenue - Same Quarter Last Year Revenue) / Same Quarter Last Year Revenue ) * 100

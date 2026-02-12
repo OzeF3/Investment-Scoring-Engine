@@ -18,7 +18,7 @@ def fetch_stock_valuation_data(ticker: str) -> dict:
 
     headers = {
         "x-rapidapi-key": os.getenv("API_VALUATION_ONE"),
-        "x-rapidapi-host": "yahoo-finance166.p.rapidapi.com"
+        "x-rapidapi-host": "yahoo-finance15.p.rapidapi.com"
     }
 
     response = requests.get(url, headers=headers, params=querystring)

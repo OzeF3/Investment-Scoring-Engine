@@ -58,11 +58,11 @@ while True:
         #getting stock valuation data for ticker:
         stock_valuation_data = fetch_stock_valuation_data(user_ticker)
 
-        stock_pe = stock_valuation_data["stockpe"]
-        stock_forward_pe = stock_valuation_data["stockforwardpe"]
-        stock_ev_ebitda_multipe = stock_valuation_data["stockevebitdamultiple"]
+        stock_pe = stock_valuation_data["pe"]
+        stock_forward_pe = stock_valuation_data["forwardpe"]
+        stock_ev_ebitda_multipe = stock_valuation_data["evebitdamultiple"]
 
-        stock_price_to_free_cash_flow_multiple = stock_valuation_data["stockpricetofreecashflowmultiple"]
+        stock_price_to_free_cash_flow_multiple = stock_valuation_data["pricetofreecashflowmultiple"]
 
         #getting sector valuation data for ticker:
         sector_valuation_data = fetch_sector_valuation_data(sector)

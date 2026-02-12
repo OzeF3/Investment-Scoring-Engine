@@ -1,0 +1,33 @@
+# Virtual environment
+venv/
+
+# Python cache files
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# IDE/editor folders
+.vscode/
+.idea/
+
+# Environment variables
+.env
+
+# Logs
+*.log
+logs/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Build/dist
+dist/
+build/
+
+# Data Reports From APIs **.json
+data_reports/
+
+# Sector Reports from ETF Website
+/sector_reports_10-2-26
+
