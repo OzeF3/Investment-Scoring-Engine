@@ -1,4 +1,3 @@
-
 import math
 
 def score_by_thresholds(value: float, thresholds: list[tuple[float, int]], default_score:int) -> int:
