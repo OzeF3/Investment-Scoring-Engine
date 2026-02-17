@@ -36,11 +36,14 @@ def fetch_moat_data(ticker: str) -> dict:
     invested_capital = total_debt + total_equity - total_cash
 
     
+    
+    return_on_investment_capital = nopat / invested_capital
+    
 
     return {
-        "revenuegrowth": revenue_growth_pct,
-        "operatingmargin": operating_margin,
+        "returnoninvestmentcapital": return_on_investment_capital,
+        "freecashflowfiveyeargrowth": ,
         "debttoequity": debt_to_equity,
-        "freecashflowmargin": free_cash_flow_margin
+        "rndtorevenuemultiple": rnd_revenue_multiple
     }
     pass
