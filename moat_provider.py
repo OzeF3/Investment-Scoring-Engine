@@ -27,22 +27,22 @@ def fetch_moat_data(ticker: str) -> dict:
         json.dump(moat_data_1, f, indent=2)  
 
     #Return on Invested Capital (ROIC) = NOPAT / Invested Capital
-    #NOPAT = Operating Income * (1 - Tax Rate)
+    #multipling by 100 to get metric in %
+    #NOPAT = Operating Income(EBIT) * (1 - Tax Rate)
+    #EBIT = operating margin * Revenue
     #Invested Capital = Total Debt + Total Equity - Cash
-
+    
     total_debt = moat_data_1["body"]["debt"]["TTM"]
     total_equity = moat_data_1["body"]["equity"]["TTM"]
     total_cash = moat_data_1["body"]["totalcash"]["TTM"]
     invested_capital = total_debt + total_equity - total_cash
+    #get from fundamental module or api (consider function for api)
+    nopat = operating_margin * revenue
+    return_on_investment_capital_pct = nopat / invested_capital * 100 
 
-    #get operating income from ebit or operating margin
-    
-    
-    return_on_investment_capital = nopat / invested_capital
-    
 
     return {
-        "returnoninvestmentcapital": return_on_investment_capital,
+        "return_on_investment_capital_pct": return_on_investment_capital_pct,
         "freecashflowfiveyeargrowth": ,
         "debttoequity": debt_to_equity,
         "rndtorevenuemultiple": rnd_revenue_multiple

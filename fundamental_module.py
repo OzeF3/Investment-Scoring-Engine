@@ -58,10 +58,10 @@ def fundamental_weighted_score(
 
     growth_weight = wbs['growth']      
     margin_weight = wbs['profit']   
-    dte_weight = wbs['debt_to_equity'] 
-    fcf_weight = wbs['fcf']           
+    debt_to_equity_weight = wbs['debt_to_equity'] 
+    free_cash_flow_weight = wbs['fcf']           
 
-    weighted_together = (growth_weight * g + margin_weight * p + dte_weight * d + fcf_weight * f)
+    weighted_together = (growth_weight * g + margin_weight * p + debt_to_equity_weight * d + free_cash_flow_weight * f)
     return round(weighted_together)
 
 def calculate_fundamental_scores(

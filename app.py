@@ -94,13 +94,13 @@ print("\n--- Fundamental Metrics ---")
 print(f"Quarterly Revenue Growth (YoY): {revenue_growth_pct:.2f}%")
 print(f"Operating Margin (TTM): {operating_margin_pct:.2f}%")
 print(f"Total Debt / Equity (MRQ): {debt_to_equity_ratio:.2f}")
-print(f"Free Cash Flow Margin (TTM): {free_cash_flow_margin_ttm:.2f}%")
+print(f"Free Cash Flow Margin (TTM): {free_cash_flow_margin_pct:.2f}%")
 
 fundamental_input = Fundamental_input(
     revenue_growth_pct=revenue_growth_pct,
     operating_margin_pct=operating_margin_pct,
     debt_to_equity_ratio=debt_to_equity_ratio,
-    free_cash_flow_margin_ttm=free_cash_flow_margin_ttm,
+    free_cash_flow_margin_pct=free_cash_flow_margin_pct,
     sector=sector
                                     )
 
