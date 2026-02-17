@@ -65,6 +65,7 @@ def fundamental_weighted_score(
     #FIX
     weighted_together = (
     revenue_growth_weight * revenue_growth + operating_margin_weight * operating_margin + debt_to_equity_weight * debt_to_equity + free_cash_flow_weight * free_cash_flow)
+    
     return round(weighted_together)
 
 def calculate_fundamental_scores(

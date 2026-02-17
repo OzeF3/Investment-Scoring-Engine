@@ -80,77 +80,77 @@ def valuation_weight(sector_name: str) -> dict:
     SECTOR_WEIGHTS = {
     "Technology": {
         "pe": 0.20,
-        "fpe": 0.30,
+        "forward_pe": 0.30,
         "ev_ebitda": 0.20,
         "ps": 0.20,
         "price_free_cash_flow": 0.10
                 },
     "Financial Services": {
         "pe": 0.25,
-        "fpe": 0.30,
+        "forward_pe": 0.30,
         "ev_ebitda": 0.25,
         "ps": 0.10,
         "price_free_cash_flow": 0.10
                     },
     "Healthcare": {
         "pe": 0.30,
-        "fpe": 0.25,
+        "forward_pe": 0.25,
         "ev_ebitda": 0.25,
         "ps": 0.10,
         "price_free_cash_flow": 0.10
                     },
     "Consumer Cyclical": {
         "pe": 0.30,
-        "fpe": 0.25,
+        "forward_pe": 0.25,
         "ev_ebitda": 0.20,
         "ps": 0.15,
         "price_free_cash_flow": 0.10
                 },
     "Consumer Defensive": {
         "pe": 0.30,
-        "fpe": 0.25,
+        "forward_pe": 0.25,
         "ev_ebitda": 0.20,
         "ps": 0.15,
         "price_free_cash_flow": 0.10
                     },
     "Communication Services": {
         "pe": 0.25,
-        "fpe": 0.25,
+        "forward_pe": 0.25,
         "ev_ebitda": 0.25,
         "ps": 0.15,
         "price_free_cash_flow": 0.10
                     },
     "Industrials": {
         "pe": 0.30,
-        "fpe": 0.25,
+        "forward_pe": 0.25,
         "ev_ebitda": 0.25,
         "ps": 0.15,
         "price_free_cash_flow": 0.05
                 },
     "Energy": {
         "pe": 0.30,
-        "fpe": 0.25,
+        "forward_pe": 0.25,
         "ev_ebitda": 0.25,
         "ps": 0.15,
         "price_free_cash_flow": 0.05
                     },
     "Utilities": {
         "pe": 0.30,
-        "fpe": 0.25,
+        "forward_pe": 0.25,
         "ev_ebitda": 0.25,
         "ps": 0.15,
         "price_free_cash_flow": 0.05
                     },
     "Basic Materials": {
         "pe": 0.30,
-        "fpe": 0.25,
+        "forward_pe": 0.25,
         "ev_ebitda": 0.25,
         "ps": 0.15,
         "price_free_cash_flow": 0.05
                     },
     "Real Estate": {
         "pe": 0.30,
-        "fpe": 0.25,
+        "forward_pe": 0.25,
         "ev_ebitda": 0.25,
         "ps": 0.15,
         "price_free_cash_flow": 0.05
