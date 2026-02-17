@@ -6,7 +6,6 @@ from fundamental_provider import fetch_fundamental_data
 from valuation_provider import fetch_stock_valuation_data
 from valuation_provider import fetch_sector_valuation_data
 
-
 data = None
 ticker = None
 sector = None
@@ -14,7 +13,7 @@ stock_label = None
 
 print("Welcome to the Investment Scoring Engine")
 
-#loop that make sure its float and system wont crash
+#loop that make sure its float and system wont crash( check weather i need it)
 def get_float(prompt) -> float:
 
     while True:
@@ -119,7 +118,7 @@ valuation_input= Valuation_input(
     sector_median_price_to_fcf=sector_median_price_to_fcf,
     sector=sector
                                 )
-# asking user for moat inputs: 
+# asking user for moat inputs: (api soon)
 print("\n--- Moat inputs ---")
 roic_raw_value = get_float("Enter ROIC 5Y average %: ")
 fcf_growth_raw = get_float("Enter FCF 5Y CAGR %: ")

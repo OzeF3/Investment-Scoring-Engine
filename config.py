@@ -3,43 +3,43 @@ def fundamental_weight(sector_name: str) -> dict:
     
     SECTOR_WEIGHTS = {
     "Technology": {
-        "growth": 0.30,
+        "revenue": 0.30,
         "profit": 0.30,
         "debt_to_equity": 0.20,
         "fcf": 0.20
                 },
     "Financial Services": {
-        "growth": 0.20,
+        "revenue": 0.20,
         "profit": 0.40,
         "debt_to_equity": 0.30,
         "fcf": 0.10
                     },
     "Consumer Cyclical": {
-        "growth": 0.40,
+        "revenue": 0.40,
         "profit": 0.30,
         "debt_to_equity": 0.15,
         "fcf": 0.15
                     },
     "Communication Services": {
-        "growth": 0.30,
+        "revenue": 0.30,
         "profit": 0.25,
         "debt_to_equity": 0.25,
         "fcf": 0.20
                     },
     "Healthcare": {
-        "growth": 0.25,
+        "revenue": 0.25,
         "profit": 0.35,
         "debt_to_equity": 0.20,
         "fcf": 0.20
                 },
     "Industrials": {
-        "growth": 0.35,
+        "revenue": 0.35,
         "profit": 0.30,
         "debt_to_equity": 0.20,
         "fcf": 0.15
                 },
     "Consumer Defensive": {
-        "growth": 0.40,
+        "revenue": 0.40,
         "profit": 0.30,
         "debt_to_equity": 0.20,
         "fcf": 0.10

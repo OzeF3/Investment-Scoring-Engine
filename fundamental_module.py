@@ -1,67 +1,70 @@
 
-from scoring_utils import score_by_thresholds
+from scoring_utils import threshold_based_score
 from config import fundamental_weight
 
 #creating table with limits and score limits
-REVENUE_GROWTH_PCT_THRESHOLDS = [
+REVENUE_GROWTH_THRESHOLDS = [
     (0.0,20),
     (5.0,40),
     (15.0,60),
     (30.0,80),
                     ]
-REVENUE_GROWTH_PCT_DEFAULT = 95
+REVENUE_GROWTH_DEFAULT = 95
 
-OPERATING_MARGIN_PCT_THRESHOLDS = [
+OPERATING_MARGIN_THRESHOLDS = [
     (0.0,20),
     (5.0,40),
     (15.0,60),
     (25.0,80),
                     ]
-OPERATING_MARGIN_PCT_DEFAULT = 95
+OPERATING_MARGIN_DEFAULT = 95
 
-DEBT_TO_EQUITY_RATIO_THRESHOLDS = [
+DEBT_TO_EQUITY_THRESHOLDS = [
     (0.2, 95), 
     (0.5, 80),  
     (1.0, 60), 
     (2.0, 40),
                  ]
-DEBT_TO_EQUITY_RATIO_DEFAULT = 20
+DEBT_TO_EQUITY_DEFAULT = 20
 
-FREE_CASH_FLOW_MARGIN_PCT_THRESHOLDS = [
+FREE_CASH_FLOW_THRESHOLDS = [
     (0, 20),
     (5, 40),
     (10, 60),
     (20, 80),
                 ]
-FREE_CASH_FLOW_MARGIN_PCT_DEFAULT = 95
+FREE_CASH_FLOW_DEFAULT = 95
 
 #specific function that sends info to the generic function in order to help it find score
-def revenue_growth_pct_score(revenue_growth_pct: float) -> int:
-    return score_by_thresholds(revenue_growth_pct, REVENUE_GROWTH_PCT_THRESHOLDS, REVENUE_GROWTH_PCT_DEFAULT)
+def revenue_score(revenue_growth_pct: float) -> int:
+    return threshold_based_score(revenue_growth_pct, REVENUE_GROWTH_THRESHOLDS, REVENUE_GROWTH_DEFAULT)
 
-def operating_margin_pct_score(operating_margin_pct: float) -> int:
-    return score_by_thresholds(operating_margin_pct, OPERATING_MARGIN_PCT_THRESHOLDS, OPERATING_MARGIN_PCT_DEFAULT)
+def operating_margin_score(operating_margin_pct: float) -> int:
+    return threshold_based_score(operating_margin_pct, OPERATING_MARGIN_THRESHOLDS, OPERATING_MARGIN_DEFAULT)
 
-def debt_to_equity_ratio_score(debt_to_equity: float) -> int:
-    return score_by_thresholds(debt_to_equity, DEBT_TO_EQUITY_RATIO_THRESHOLDS, DEBT_TO_EQUITY_RATIO_DEFAULT)
+def debt_to_equity_score(debt_to_equity: float) -> int:
+    return threshold_based_score(debt_to_equity, DEBT_TO_EQUITY_THRESHOLDS, DEBT_TO_EQUITY_DEFAULT)
 
-def free_cash_flow_margin_pct_score(free_cash_flow_margin_pct: float) -> int:
-    return score_by_thresholds(free_cash_flow_margin_pct, FREE_CASH_FLOW_MARGIN_PCT_THRESHOLDS, FREE_CASH_FLOW_MARGIN_PCT_DEFAULT)
+def free_cash_flow_score(free_cash_flow_margin_pct: float) -> int:
+    return threshold_based_score(free_cash_flow_margin_pct, FREE_CASH_FLOW_THRESHOLDS, FREE_CASH_FLOW_DEFAULT)
 
 def fundamental_weighted_score(
-        g: int,
-        p: int,
-        d: int,
-        f: int,
+        revenue_growth: int,
+        operating_margin: int,
+        debt_to_equity: int,
+        free_cash_flow: int,
         wbs: dict
                             ) -> int:
-
-    growth_weight = wbs['growth']      
-    margin_weight = wbs['profit']   
+    
+    #FIX
+    revenue_growth_weight = wbs['revenue_growth']      
+    operating_margin_weight = wbs['operating_margin']   
     debt_to_equity_weight = wbs['debt_to_equity'] 
-    free_cash_flow_weight = wbs['fcf']           
+    free_cash_flow_weight = wbs['free_cash_flow']      
 
-    weighted_together = (growth_weight * g + margin_weight * p + debt_to_equity_weight * d + free_cash_flow_weight * f)
+    #FIX
+    weighted_together = (
+    revenue_growth_weight * revenue_growth + operating_margin_weight * operating_margin + debt_to_equity_weight * debt_to_equity + free_cash_flow_weight * free_cash_flow)
     return round(weighted_together)
 
 def calculate_fundamental_scores(
@@ -75,19 +78,20 @@ def calculate_fundamental_scores(
     Core function of the fundamentals module.
     Gets raw inputs and returns all scores + final fundamentals_score.
     """
-    g = revenue_growth_pct_score(revenue_growth_pct)
-    p = operating_margin_pct_score(operating_margin_pct)
-    d = debt_to_equity_ratio_score(debt_to_equity_ratio)
-    f = free_cash_flow_margin_pct_score(free_cash_flow_margin_pct)
+    revenue_growth = revenue_score(revenue_growth_pct)
+    operating_margin = operating_margin_score(operating_margin_pct)
+    debt_to_equity = debt_to_equity_score(debt_to_equity_ratio)
+    free_cash_flow = free_cash_flow_score(free_cash_flow_margin_pct)
     weight_by_sector = fundamental_weight(sector_name)
 
-    final_score = fundamental_weighted_score(g, p, d, f, weight_by_sector)
+    final_score = fundamental_weighted_score
+    (revenue_growth, operating_margin, debt_to_equity, free_cash_flow, weight_by_sector)
 
     return {
-        "revenue_growth_pct_score": g,
-        "operating_margin_pct_score": p,
-        "debt_to_equity_ratio_score": d,
-        "free_cash_flow_margin_pct_score": f,
+        "revenue_score": revenue_growth,
+        "operating_margin_score": operating_margin,
+        "debt_to_equity_score": debt_to_equity,
+        "fcf_score": free_cash_flow,
         "sector_name": sector_name,
         "weight_currently_being_used": weight_by_sector,
         "fundamentals_score": final_score

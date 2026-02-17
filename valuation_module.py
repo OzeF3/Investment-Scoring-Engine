@@ -1,18 +1,18 @@
-from scoring_utils import score_ratio
+from scoring_utils import score_relative_to_sector
 from config import valuation_weight
 
 PE_INVALID = float('nan')
-PE_RATIO_THRESHOLDS = [
+PE_THRESHOLDS = [
     (0.6,95),
     (0.85,80),
     (1.15,50),
     (1.5,30),
     (2.0,15),
                     ]
-PE_RATIO_DEFAULT = 0
+PE_DEFAULT = 0
 
-F_PE_INVALID = float('nan')
-F_PE_RATIO_THRESHOLDS = [
+FORWARD_PE_INVALID = float('nan')
+FORWARD_PE_THRESHOLDS = [
     (0.60,95),
     (0.80,90),
     (0.90,75),
@@ -21,10 +21,10 @@ F_PE_RATIO_THRESHOLDS = [
     (1.60,25),
     (2.00,15),
             ]
-F_PE_DEFAULT = 5
+FORWARD_PE_DEFAULT = 5
 
-EVEBITDA_INVALID = float('nan')
-EVEBITDA_RATIO_THRESHOLDS = [
+EV_EBITDA_INVALID = float('nan')
+EV_EBITDA_THRESHOLDS = [
     (0.70, 95),   
     (0.90, 85),   
     (1.10, 60),   
@@ -32,10 +32,10 @@ EVEBITDA_RATIO_THRESHOLDS = [
     (2.00, 25),  
     (3.00, 15),   
                             ]
-EVEBITDA_RATIO_DEFAULT = 5 
+EV_EBITDA_DEFAULT = 5 
 
 PS_INVALID = float('nan')
-PS_RATIO_THRESHOLDS = [
+PS_THRESHOLDS = [
     (0.70, 95), 
     (0.90, 85),    
     (1.10, 60),   
@@ -43,10 +43,10 @@ PS_RATIO_THRESHOLDS = [
     (2.00, 25),   
     (3.00, 15),  
                     ]
-PS_RATIO_DEFAULT = 5     
+PS_DEFAULT = 5     
 
-PFCF_INVALID = float('nan')
-PFCF_RATIO_THRESHOLDS = [
+P_FCF_INVALID = float('nan')
+P_FCF_THRESHOLDS = [
     (0.70, 95),   
     (0.90, 85),  
     (1.10, 60),   
@@ -54,23 +54,23 @@ PFCF_RATIO_THRESHOLDS = [
     (2.00, 25),   
     (3.00, 15), 
                         ]
-PFCF_RATIO_DEFAULT = 5   
+P_FCF_DEFAULT = 5   
 
 #specific function that sends info to the generic function in order to help it find score
-def pe_ratio(stock_pe: float, sector_median_pe:float) -> int:
-    return score_ratio(stock_pe, sector_median_pe, PE_RATIO_THRESHOLDS, PE_RATIO_DEFAULT )
+def pe_score(stock_pe: float, sector_median_pe:float) -> int:
+    return score_relative_to_sector(stock_pe, sector_median_pe, PE_THRESHOLDS, PE_DEFAULT )
 
-def forward_pe_ratio(stock_forward_pe: float, sector_median_forward_pe:float) -> int:
-    return score_ratio(stock_forward_pe, sector_median_forward_pe, F_PE_RATIO_THRESHOLDS, F_PE_DEFAULT)
+def forward_pe_score(stock_forward_pe: float, sector_median_forward_pe:float) -> int:
+    return score_relative_to_sector(stock_forward_pe, sector_median_forward_pe, F_PE_RATIO_THRESHOLDS, F_PE_DEFAULT)
 
-def evebitda_ratio(stock_ev_ebitda_multipe:float, sector_median_ev_ebitda_multiple:float) -> int:
-    return score_ratio(stock_ev_ebitda_multipe, sector_median_ev_ebitda_multiple, EVEBITDA_RATIO_THRESHOLDS, EVEBITDA_RATIO_DEFAULT)
+def ev_ebitda_score(stock_ev_ebitda_multipe:float, sector_median_ev_ebitda_multiple:float) -> int:
+    return score_relative_to_sector(stock_ev_ebitda_multipe, sector_median_ev_ebitda_multiple, EVEBITDA_RATIO_THRESHOLDS, EVEBITDA_RATIO_DEFAULT)
 
 def ps_ratio(stock_price_to_sales_multiple:float, sector_median_price_to_sales_multiple: float) -> int:
-    return score_ratio(stock_price_to_sales_multiple, sector_median_price_to_sales_multiple, PS_RATIO_THRESHOLDS, PS_RATIO_DEFAULT)
+    return score_relative_to_sector(stock_price_to_sales_multiple, sector_median_price_to_sales_multiple, PS_RATIO_THRESHOLDS, PS_RATIO_DEFAULT)
 
 def price_fcf_ratio(stock_price_to_free_cash_flow_multiple:float, sector_median_price_to_fcf: float) -> int:
-    return score_ratio(stock_price_to_free_cash_flow_multiple, sector_median_price_to_fcf, PFCF_RATIO_THRESHOLDS, PFCF_RATIO_DEFAULT)
+    return score_relative_to_sector(stock_price_to_free_cash_flow_multiple, sector_median_price_to_fcf, PFCF_RATIO_THRESHOLDS, PFCF_RATIO_DEFAULT)
 
 def valuation_weighted_score(
         pe:int,
@@ -108,7 +108,7 @@ def calculate_valuation_scores(
     Core function of the valuation module.
     Gets raw inputs and returns all scores + final valuation_score.
     """
-    pe = pe_ratio(stock_pe, sector_median_pe)
+    pe = pe_(stock_pe, sector_median_pe)
     fpe = forward_pe_ratio(stock_forward_pe, sector_median_forward_pe)
     eveb = evebitda_ratio(stock_ev_ebitda_multipe, sector_median_ev_ebitda_multiple)
     ps = ps_ratio(stock_price_to_sales_multiple, sector_median_price_to_sales_multiple)

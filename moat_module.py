@@ -1,15 +1,15 @@
 
-from scoring_utils import score_by_thresholds
+from scoring_utils import threshold_based_score
 from config import moat_weight
 
-ROIC_THRESHOLDS = [
+RETURN_ON_INVESTMENT_CAPITAL_PCT_THRESHOLDS = [
     (3, 20),    
     (7, 40),    
     (12, 60),   
     (18, 80),   
     (25, 90),   
                     ]
-ROIC_DEFAULT = 98   
+RETURN_ON_INVESTMENT_CAPITAL_PCT_DEFAULT = 98   
 
 FCF_5Y_GROWTH_THRESHOLDS = [
     (0, 20),    
@@ -38,18 +38,18 @@ RND_TO_REVENUE_RATIO_THRESHOLDS = [
 RND_TO_REVENUE_RATIO_DEFAULT = 98   
 
 def roic_score(roic_5y_avg: float) -> int:
-    return score_by_thresholds(roic_5y_avg, ROIC_THRESHOLDS, ROIC_DEFAULT)
+    return threshold_based_score(roic_5y_avg, ROIC_THRESHOLDS, ROIC_DEFAULT)
 
 def fcf_growth_score(fcf_5y_growth: float) -> int:
-    return score_by_thresholds(fcf_5y_growth, FCF_5Y_GROWTH_THRESHOLDS, FCF_5Y_GROWTH_DEFAULT)
+    return threshold_based_score(fcf_5y_growth, FCF_5Y_GROWTH_THRESHOLDS, FCF_5Y_GROWTH_DEFAULT)
 
 def gross_m_stability_score(gm_list: list[float]) -> int:
     gm_range = max(gm_list) - min(gm_list)
-    return score_by_thresholds(gm_range,GM_STABILITY_THRESHOLDS,GM_STABILITY_DEFAULT)
+    return threshold_based_score(gm_range,GM_STABILITY_THRESHOLDS,GM_STABILITY_DEFAULT)
 
 def rnd_revenue_score(rnd: float, revenue:float) -> int:
     r_and_d_ratio = (rnd/revenue) * 100
-    return score_by_thresholds(r_and_d_ratio,RND_TO_REVENUE_RATIO_THRESHOLDS,RND_TO_REVENUE_RATIO_DEFAULT)
+    return threshold_based_score(r_and_d_ratio,RND_TO_REVENUE_RATIO_THRESHOLDS,RND_TO_REVENUE_RATIO_DEFAULT)
 
 def moat_weighted_score(
     roic: int,
