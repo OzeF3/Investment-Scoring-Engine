@@ -3,70 +3,70 @@ def fundamental_weight(sector_name: str) -> dict:
     
     SECTOR_WEIGHTS = {
     "Technology": {
-        "revenue": 0.30,
-        "profit": 0.30,
+        "revenue_growth": 0.30,
+        "operating_margin": 0.30,
         "debt_to_equity": 0.20,
-        "fcf": 0.20
+        "free_cash_flow": 0.20
                 },
     "Financial Services": {
-        "revenue": 0.20,
-        "profit": 0.40,
+        "revenue_growth": 0.20,
+        "operating_margin": 0.40,
         "debt_to_equity": 0.30,
-        "fcf": 0.10
+        "free_cash_flow": 0.10
                     },
     "Consumer Cyclical": {
-        "revenue": 0.40,
-        "profit": 0.30,
+        "revenue_growth": 0.40,
+        "operating_margin": 0.30,
         "debt_to_equity": 0.15,
-        "fcf": 0.15
+        "free_cash_flow": 0.15
                     },
     "Communication Services": {
-        "revenue": 0.30,
-        "profit": 0.25,
+        "revenue_growth": 0.30,
+        "operating_margin": 0.25,
         "debt_to_equity": 0.25,
-        "fcf": 0.20
+        "free_cash_flow": 0.20
                     },
     "Healthcare": {
-        "revenue": 0.25,
-        "profit": 0.35,
+        "revenue_growth": 0.25,
+        "operating_margin": 0.35,
         "debt_to_equity": 0.20,
-        "fcf": 0.20
+        "free_cash_flow": 0.20
                 },
     "Industrials": {
-        "revenue": 0.35,
-        "profit": 0.30,
+        "revenue_growth": 0.35,
+        "operating_margin": 0.30,
         "debt_to_equity": 0.20,
-        "fcf": 0.15
+        "free_cash_flow": 0.15
                 },
     "Consumer Defensive": {
-        "revenue": 0.40,
-        "profit": 0.30,
+        "revenue_growth": 0.40,
+        "operating_margin": 0.30,
         "debt_to_equity": 0.20,
-        "fcf": 0.10
+        "free_cash_flow": 0.10
                     },
     "Energy": {
         "growth": 0.25,
-        "profit": 0.40,
+        "operating_margin": 0.40,
         "debt_to_equity": 0.25,
-        "fcf": 0.10
+        "free_cash_flow": 0.10
                     },
     "Basic Materials": {
         "growth": 0.25,
-        "profit": 0.40,
+        "operating_margin": 0.40,
         "debt_to_equity": 0.25,
-        "fcf": 0.10
+        "free_cash_flow": 0.10
                     },
     "Real Estate": {
         "growth": 0.20,
-        "profit": 0.35,
+        "operating_margin": 0.35,
         "debt_to_equity": 0.30,
-        "fcf": 0.15
+        "free_cash_flow": 0.15
                     },
     "Utilities": {
         "growth": 0.25,
-        "profit": 0.35,
+        "operating_margin": 0.35,
         "debt_to_equity": 0.25,
-        "fcf": 0.15
+        "free_cash_flow": 0.15
                     }
                     }
 
@@ -83,77 +83,77 @@ def valuation_weight(sector_name: str) -> dict:
         "fpe": 0.30,
         "ev_ebitda": 0.20,
         "ps": 0.20,
-        "price_fcf": 0.10
+        "price_free_cash_flow": 0.10
                 },
     "Financial Services": {
         "pe": 0.25,
         "fpe": 0.30,
         "ev_ebitda": 0.25,
         "ps": 0.10,
-        "price_fcf": 0.10
+        "price_free_cash_flow": 0.10
                     },
     "Healthcare": {
         "pe": 0.30,
         "fpe": 0.25,
         "ev_ebitda": 0.25,
         "ps": 0.10,
-        "price_fcf": 0.10
+        "price_free_cash_flow": 0.10
                     },
     "Consumer Cyclical": {
         "pe": 0.30,
         "fpe": 0.25,
         "ev_ebitda": 0.20,
         "ps": 0.15,
-        "price_fcf": 0.10
+        "price_free_cash_flow": 0.10
                 },
     "Consumer Defensive": {
         "pe": 0.30,
         "fpe": 0.25,
         "ev_ebitda": 0.20,
         "ps": 0.15,
-        "price_fcf": 0.10
+        "price_free_cash_flow": 0.10
                     },
     "Communication Services": {
         "pe": 0.25,
         "fpe": 0.25,
         "ev_ebitda": 0.25,
         "ps": 0.15,
-        "price_fcf": 0.10
+        "price_free_cash_flow": 0.10
                     },
     "Industrials": {
         "pe": 0.30,
         "fpe": 0.25,
         "ev_ebitda": 0.25,
         "ps": 0.15,
-        "price_fcf": 0.05
+        "price_free_cash_flow": 0.05
                 },
     "Energy": {
         "pe": 0.30,
         "fpe": 0.25,
         "ev_ebitda": 0.25,
         "ps": 0.15,
-        "price_fcf": 0.05
+        "price_free_cash_flow": 0.05
                     },
     "Utilities": {
         "pe": 0.30,
         "fpe": 0.25,
         "ev_ebitda": 0.25,
         "ps": 0.15,
-        "price_fcf": 0.05
+        "price_free_cash_flow": 0.05
                     },
     "Basic Materials": {
         "pe": 0.30,
         "fpe": 0.25,
         "ev_ebitda": 0.25,
         "ps": 0.15,
-        "price_fcf": 0.05
+        "price_free_cash_flow": 0.05
                     },
     "Real Estate": {
         "pe": 0.30,
         "fpe": 0.25,
         "ev_ebitda": 0.25,
         "ps": 0.15,
-        "price_fcf": 0.05
+        "price_free_cash_flow": 0.05
                     }
                     }
     
@@ -167,67 +167,67 @@ def moat_weight(sector_name: str) -> dict:
     SECTOR_WEIGHTS = {
     "Technology": {
         "roic": 0.35,
-        "fcf_5y_g": 0.20,
+        "free_cash_flow_5y_g": 0.20,
         "gm_stability": 0.20,
         "rnd_to_rev": 0.25
                 },
     "Financial Services": {
         "roic": 0.45,
-        "fcf_5y_g": 0.25,
+        "free_cash_flow_5y_g": 0.25,
         "gm_stability": 0.25,
         "rnd_to_rev": 0.05
                     },
     "Healthcare": {
         "roic": 0.30,
-        "fcf_5y_g": 0.15,
+        "free_cash_flow_5y_g": 0.15,
         "gm_stability": 0.20,
         "rnd_to_rev": 0.35
                     },
     "Consumer Cyclical": {
         "roic": 0.30,
-        "fcf_5y_g": 0.25,
+        "free_cash_flow_5y_g": 0.25,
         "gm_stability": 0.25,
         "rnd_to_rev": 0.20
                 },
     "Consumer Defensive": {
         "roic": 0.35,
-        "fcf_5y_g": 0.30,
+        "free_cash_flow_5y_g": 0.30,
         "gm_stability": 0.20,
         "rnd_to_rev": 0.15
                     },
     "Communication Services": {
         "roic": 0.35,
-        "fcf_5y_g": 0.25,
+        "free_cash_flow_5y_g": 0.25,
         "gm_stability": 0.20,
         "rnd_to_rev": 0.20
                     },
     "Industrials": {
         "roic": 0.35,
-        "fcf_5y_g": 0.25,
+        "free_cash_flow_5y_g": 0.25,
         "gm_stability": 0.20,
         "rnd_to_rev": 0.20
                 },
     "Energy": {
         "roic": 0.35,
-        "fcf_5y_g": 0.25,
+        "free_cash_flow_5y_g": 0.25,
         "gm_stability": 0.20,
         "rnd_to_rev": 0.20
                     },
     "Utilities": {
         "roic": 0.35,
-        "fcf_5y_g": 0.25,
+        "free_cash_flow_5y_g": 0.25,
         "gm_stability": 0.20,
         "rnd_to_rev": 0.20
                     },
     "Basic Materials": {
         "roic": 0.35,
-        "fcf_5y_g": 0.25,
+        "free_cash_flow_5y_g": 0.25,
         "gm_stability": 0.20,
         "rnd_to_rev": 0.20
                     },
     "Real Estate": {
         "roic": 0.40,
-        "fcf_5y_g": 0.25,
+        "free_cash_flow_5y_g": 0.25,
         "gm_stability": 0.30,
         "rnd_to_rev": 0.05
                     }

@@ -5,9 +5,9 @@ def test_fundamentals_score_in_int_range():
 
     result = calculate_fundamental_scores(
         growth_pct=25,
-        profit_pct=23,
+        operating_margin_pct=23,
         debt_to_equity=1.2,
-        fcf_margin_pct=5,
+        free_cash_flow_margin_pct=5,
         sector_name="Energy"
     )
 

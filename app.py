@@ -48,7 +48,7 @@ while True:
         #getting fundamental data for ticker:
         fundamental_data = fetch_fundamental_data(user_ticker)
 
-        revenue_growth_pct = fundamental_data["revenue_growth_pct"]
+        revenue_growth_growth_pct = fundamental_data["revenue_growth_growth_pct"]
         operating_margin_pct = fundamental_data["operating_margin_pct"]
         debt_to_equity_ratio = fundamental_data["debt_to_equity_ratio"]
         free_cash_flow_margin_pct = fundamental_data["free_cash_flow_margin_pct"]
@@ -90,13 +90,13 @@ if data is None:
     raise SystemExit(0)
 
 print("\n--- Fundamental Metrics ---")
-print(f"Quarterly Revenue Growth (YoY): {revenue_growth_pct:.2f}%")
+print(f"Quarterly revenue_growth Growth (YoY): {revenue_growth_growth_pct:.2f}%")
 print(f"Operating Margin (TTM): {operating_margin_pct:.2f}%")
 print(f"Total Debt / Equity (MRQ): {debt_to_equity_ratio:.2f}")
 print(f"Free Cash Flow Margin (TTM): {free_cash_flow_margin_pct:.2f}%")
 
 fundamental_input = Fundamental_input(
-    revenue_growth_pct=revenue_growth_pct,
+    revenue_growth_growth_pct=revenue_growth_growth_pct,
     operating_margin_pct=operating_margin_pct,
     debt_to_equity_ratio=debt_to_equity_ratio,
     free_cash_flow_margin_pct=free_cash_flow_margin_pct,
@@ -131,15 +131,15 @@ gm4 = get_float("Year 4 Gross Margin %: ")
 gm5 = get_float("Year 5 Gross Margin %: ")
 gross_margin_list = [gm1, gm2, gm3, gm4, gm5]
 
-r_and_d_raw = get_float("Enter total R&D (same units as revenue): ")
-revenue_raw = get_float("Enter total Revenue (same units as R&D): ")
+r_and_d_raw = get_float("Enter total R&D (same units as revenue_growth): ")
+revenue_growth_raw = get_float("Enter total revenue_growth (same units as R&D): ")
 
 moat_input = Moat_input(
     roic_raw_value=roic_raw_value,
     fcf_growth_raw=fcf_growth_raw,
     gross_margin_list=gross_margin_list,
     r_and_d_raw=r_and_d_raw,
-    revenue_raw=revenue_raw,
+    revenue_growth_raw=revenue_growth_raw,
     sector=sector
                         )
 

@@ -43,7 +43,7 @@ def test_final_score_in_range(mocker):
         revenue_growth=10,
         operating_margin=20,
         debt_to_equity=1.0,
-        fcf_margin=15,
+        free_cash_flow_margin=15,
         sector="technology"
     )
 

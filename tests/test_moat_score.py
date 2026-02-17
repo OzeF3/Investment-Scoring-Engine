@@ -5,7 +5,7 @@ def test_moat_score_int_range():
     result = calculate_moat_scores(
 
     roic_raw_value=15,
-    fcf_growth_raw=13,
+    free_cash_flow_growth_raw=13,
     gross_margin_list= [11,13,14,15,16],
     r_and_d_raw=11,
     revenue_raw=16,
