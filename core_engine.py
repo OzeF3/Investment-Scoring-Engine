@@ -8,10 +8,10 @@ from dataclasses import dataclass
 
 @dataclass
 class Fundamental_input:
-    revenue_growth_yoy: float
-    gross_margin_ttm: float
-    debt_to_equity: float
-    free_cash_flow_margin_ttm: float
+    revenue_growth_pct: float
+    operating_margin_pct: float
+    debt_to_equity_ratio: float
+    free_cash_flow_margin_pct: float
     sector: str
 
 @dataclass
@@ -43,17 +43,17 @@ def calculate_all_scores(
         moat_input: Moat_input
                         ):
 
-    revenue_growth_yoy = fundamental_input.revenue_growth_yoy
-    gross_margin_ttm = fundamental_input.gross_margin_ttm
-    debt_to_equity = fundamental_input.debt_to_equity
-    free_cash_flow_margin_ttm = fundamental_input.free_cash_flow_margin_ttm
+    revenue_growth_pct = fundamental_input.revenue_growth_pct
+    operating_margin_pct = fundamental_input.operating_margin_pct
+    debt_to_equity_ratio = fundamental_input.debt_to_equity_ratio
+    free_cash_flow_margin_pct = fundamental_input.free_cash_flow_margin_pct
     f_sector_name = fundamental_input.sector
 
     fundamentals_scores = calculate_fundamental_scores(
-        revenue_growth_yoy = revenue_growth_yoy,
-        gross_margin_ttm = gross_margin_ttm,
-        debt_to_equity = debt_to_equity,
-        free_cash_flow_margin_ttm = free_cash_flow_margin_ttm,
+        revenue_growth_pct = revenue_growth_pct,
+        operating_margin_pct = operating_margin_pct,
+        debt_to_equity_ratio = debt_to_equity_ratio,
+        free_cash_flow_margin_pct = free_cash_flow_margin_pct,
         sector_name = f_sector_name
                                                         )
 

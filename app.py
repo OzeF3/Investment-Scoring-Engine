@@ -49,10 +49,10 @@ while True:
         #getting fundamental data for ticker:
         fundamental_data = fetch_fundamental_data(user_ticker)
 
-        revenue_growth_yoy = fundamental_data["revenuegrowth"]
-        gross_margin_ttm = fundamental_data["operatingmargin"]
-        debt_to_equity = fundamental_data["debttoequity"]
-        free_cash_flow_margin_ttm = fundamental_data["freecashflowmargin"]
+        revenue_growth_pct = fundamental_data["revenue_growth_pct"]
+        operating_margin_pct = fundamental_data["operating_margin_pct"]
+        debt_to_equity_ratio = fundamental_data["debt_to_equity_ratio"]
+        free_cash_flow_margin_pct = fundamental_data["free_cash_flow_margin_pct"]
 
         #getting STOCK valuation data for ticker:
         stock_valuation_data = fetch_stock_valuation_data(user_ticker)
@@ -91,15 +91,15 @@ if data is None:
     raise SystemExit(0)
 
 print("\n--- Fundamental Metrics ---")
-print(f"Quarterly Revenue Growth (YoY): {revenue_growth_yoy:.2f}%")
-print(f"Operating Margin (TTM): {gross_margin_ttm:.2f}%")
-print(f"Total Debt / Equity (MRQ): {debt_to_equity:.2f}")
+print(f"Quarterly Revenue Growth (YoY): {revenue_growth_pct:.2f}%")
+print(f"Operating Margin (TTM): {operating_margin_pct:.2f}%")
+print(f"Total Debt / Equity (MRQ): {debt_to_equity_ratio:.2f}")
 print(f"Free Cash Flow Margin (TTM): {free_cash_flow_margin_ttm:.2f}%")
 
 fundamental_input = Fundamental_input(
-    revenue_growth_yoy=revenue_growth_yoy,
-    gross_margin_ttm=gross_margin_ttm,
-    debt_to_equity=debt_to_equity,
+    revenue_growth_pct=revenue_growth_pct,
+    operating_margin_pct=operating_margin_pct,
+    debt_to_equity_ratio=debt_to_equity_ratio,
     free_cash_flow_margin_ttm=free_cash_flow_margin_ttm,
     sector=sector
                                     )

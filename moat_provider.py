@@ -35,6 +35,7 @@ def fetch_moat_data(ticker: str) -> dict:
     total_cash = moat_data_1["body"]["totalcash"]["TTM"]
     invested_capital = total_debt + total_equity - total_cash
 
+    #get operating income from ebit or operating margin
     
     
     return_on_investment_capital = nopat / invested_capital
