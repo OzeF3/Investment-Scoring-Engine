@@ -5,39 +5,6 @@ import json
 
 load_dotenv()
 
-#creating table with limits and score limits
-REVENUE_GROWTH_THRESHOLDS = [
-    (0.0,20),
-    (5.0,40),
-    (15.0,60),
-    (30.0,80),
-                    ]
-REVENUE_GROWTH_DEFAULT = 95
-
-OPERATING_MARGIN_THRESHOLDS = [
-    (0.0,20),
-    (5.0,40),
-    (15.0,60),
-    (25.0,80),
-                    ]
-OPERATING_MARGIN_DEFAULT = 95
-
-DEBT_TO_EQUITY_THRESHOLDS = [
-    (0.2, 95), 
-    (0.5, 80),  
-    (1.0, 60), 
-    (2.0, 40),
-                 ]
-DEBT_TO_EQUITY_DEFAULT = 20
-
-FREE_CASH_FLOW_THRESHOLDS = [
-    (0, 20),
-    (5, 40),
-    (10, 60),
-    (20, 80),
-                ]
-FREE_CASH_FLOW_DEFAULT = 95
-
 def fetch_fundamental_data_from_api(ticker) -> dict:
     """
     opening file_1 and fetching fundamental financial metrics:
@@ -86,6 +53,38 @@ def fetch_fundamental_data_from_api(ticker) -> dict:
         "free_cash_flow_margin_pct": free_cash_flow_margin_pct
     }
 
+#creating table with limits and score limits
+REVENUE_GROWTH_THRESHOLDS = [
+    (0.0,20),
+    (5.0,40),
+    (15.0,60),
+    (30.0,80),
+                    ]
+REVENUE_GROWTH_DEFAULT = 95
+
+OPERATING_MARGIN_THRESHOLDS = [
+    (0.0,20),
+    (5.0,40),
+    (15.0,60),
+    (25.0,80),
+                    ]
+OPERATING_MARGIN_DEFAULT = 95
+
+DEBT_TO_EQUITY_THRESHOLDS = [
+    (0.2, 95), 
+    (0.5, 80),  
+    (1.0, 60), 
+    (2.0, 40),
+                 ]
+DEBT_TO_EQUITY_DEFAULT = 20
+
+FREE_CASH_FLOW_THRESHOLDS = [
+    (0, 20),
+    (5, 40),
+    (10, 60),
+    (20, 80),
+                ]
+FREE_CASH_FLOW_DEFAULT = 95
 
 #specific function that sends info to the generic function in order to help it find score
 def revenue_score(revenue_growth_pct: float) -> int:
@@ -108,13 +107,11 @@ def fundamental_weighted_score(
         wbs: dict
                             ) -> int:
     
-    #FIX
     revenue_growth_weight = wbs['revenue_growth']      
     operating_margin_weight = wbs['operating_margin']   
     debt_to_equity_weight = wbs['debt_to_equity'] 
     free_cash_flow_weight = wbs['free_cash_flow']      
 
-    #FIX
     weighted_together = (
     revenue_growth_weight * revenue_growth + operating_margin_weight * operating_margin + debt_to_equity_weight * debt_to_equity + free_cash_flow_weight * free_cash_flow)
     

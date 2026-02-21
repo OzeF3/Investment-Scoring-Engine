@@ -5,62 +5,7 @@ import json
 import os
 import pandas as pd
 import statistics
-from api_caller import create_financial_file_2
-
-PE_INVALID = float('nan')
-PE_THRESHOLDS = [
-    (0.6,95),
-    (0.85,80),
-    (1.15,50),
-    (1.5,30),
-    (2.0,15),
-                    ]
-PE_DEFAULT = 0
-
-FORWARD_PE_INVALID = float('nan')
-FORWARD_PE_THRESHOLDS = [
-    (0.60,95),
-    (0.80,90),
-    (0.90,75),
-    (1.10,55),
-    (1.30,40),
-    (1.60,25),
-    (2.00,15),
-            ]
-FORWARD_PE_DEFAULT = 5
-
-EV_EBITDA_INVALID = float('nan')
-EV_EBITDA_THRESHOLDS = [
-    (0.70, 95),   
-    (0.90, 85),   
-    (1.10, 60),   
-    (1.40, 40),   
-    (2.00, 25),  
-    (3.00, 15),   
-                            ]
-EV_EBITDA_DEFAULT = 5 
-
-PS_INVALID = float('nan')
-PS_THRESHOLDS = [
-    (0.70, 95), 
-    (0.90, 85),    
-    (1.10, 60),   
-    (1.40, 40),   
-    (2.00, 25),   
-    (3.00, 15),  
-                    ]
-PS_DEFAULT = 5     
-
-P_FCF_INVALID = float('nan')
-P_FCF_THRESHOLDS = [
-    (0.70, 95),   
-    (0.90, 85),  
-    (1.10, 60),   
-    (1.40, 40),   
-    (2.00, 25),   
-    (3.00, 15), 
-                        ]
-P_FCF_DEFAULT = 5   
+from api_caller import create_financial_file_2 
 
 def fetch_valuation_data_from_api(ticker) -> dict:
     """
@@ -116,6 +61,14 @@ def calculate_sector_median(sector_metrics: dict, metric_name: str):
     return statistics.median(values)
 
 def fetch_sector_valuation_data(sector: str):
+    """
+    fetching sector_valuation financial metrics:
+        -sector pe
+        -sector forward pe
+        -sector ev/ebitda multiple
+        -sector p/s multiple
+        -sector price/free cash flow multiple
+    """
 
     #creating dict which connecting SECTOR NAME to SECTOR FILE NAME
     SECTOR_FILE_MAP = {
@@ -175,6 +128,60 @@ def fetch_sector_valuation_data(sector: str):
         "sector_median_price_to_fcf": sector_median_price_to_fcf
     }
 
+PE_INVALID = float('nan')
+PE_THRESHOLDS = [
+    (0.6,95),
+    (0.85,80),
+    (1.15,50),
+    (1.5,30),
+    (2.0,15),
+                    ]
+PE_DEFAULT = 0
+
+FORWARD_PE_INVALID = float('nan')
+FORWARD_PE_THRESHOLDS = [
+    (0.60,95),
+    (0.80,90),
+    (0.90,75),
+    (1.10,55),
+    (1.30,40),
+    (1.60,25),
+    (2.00,15),
+            ]
+FORWARD_PE_DEFAULT = 5
+
+EV_EBITDA_INVALID = float('nan')
+EV_EBITDA_THRESHOLDS = [
+    (0.70, 95),   
+    (0.90, 85),   
+    (1.10, 60),   
+    (1.40, 40),   
+    (2.00, 25),  
+    (3.00, 15),   
+                            ]
+EV_EBITDA_DEFAULT = 5 
+
+PS_INVALID = float('nan')
+PS_THRESHOLDS = [
+    (0.70, 95), 
+    (0.90, 85),    
+    (1.10, 60),   
+    (1.40, 40),   
+    (2.00, 25),   
+    (3.00, 15),  
+                    ]
+PS_DEFAULT = 5     
+
+P_FCF_INVALID = float('nan')
+P_FCF_THRESHOLDS = [
+    (0.70, 95),   
+    (0.90, 85),  
+    (1.10, 60),   
+    (1.40, 40),   
+    (2.00, 25),   
+    (3.00, 15), 
+                        ]
+P_FCF_DEFAULT = 5  
 
 #specific function that sends info to the generic function in order to help it find score
 def pe_score(stock_pe: float, sector_median_pe:float) -> int:

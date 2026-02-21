@@ -1,6 +1,54 @@
-
 from scoring_utils import threshold_based_score
 from config import moat_weight
+from dotenv import load_dotenv
+import json
+
+load_dotenv()
+
+def fetch_moat_data_from_api(ticker) -> dict:
+    """
+    opening file_1 and fetching fundamental financial metrics:
+        
+    """
+    clean_ticker = ticker.strip().upper()
+    file_path_1 = f"data_reports/json_file_1_{clean_ticker}.json"
+    with open(file_path_1, "r", encoding="utf-8") as f:
+            file_1 = json.load(f)
+
+    #Quarterly Revenue Growth (yoy) = ( (New Quarter Revenue - Same Quarter Last Year Revenue) / Same Quarter Last Year Revenue ) * 100
+    #multipling by 100 to get metric in %
+    revenue_growth_raw = (file_1["quoteSummary"]["result"][0]
+            ["financialData"]["revenueGrowth"]["raw"]
+        )
+    revenue_growth_pct = revenue_growth_raw * 100
+    
+    #operating margin (ttm) = Operating Income (EBIT) / Revenue
+    #multipling by 100 to get metric in %
+    operating_margin_raw = (file_1["quoteSummary"]["result"][0]
+            ["financialData"]["operatingMargins"]["raw"]
+        )
+    operating_margin_pct = operating_margin_raw * 100
+
+    #debt to equity = Total Debt / Total Shareholders' Equity
+    debt_to_equity_ratio = (file_1["quoteSummary"]["result"][0]
+            ["financialData"]["debtToEquity"]["raw"])
+
+    #FREE CASH FLOW MARGIN(TTM)% = Levered free cash flow(ttm) / Revenue(ttm) * 100 
+    #multipling by 100 to get metric in %
+    revenue = (file_1["quoteSummary"]["result"][0]
+            ["financialData"]["totalRevenue"]["raw"])
+    
+    levered_free_cash_flow = (file_1["quoteSummary"]["result"][0]
+            ["financialData"]["freeCashflow"]["raw"])
+    
+    free_cash_flow_margin_pct = (levered_free_cash_flow / revenue) * 100
+
+    return {
+        "revenue_growth_pct": revenue_growth_pct,
+        "operating_margin_pct": operating_margin_pct,
+        "debt_to_equity_ratio": debt_to_equity_ratio,
+        "free_cash_flow_margin_pct": free_cash_flow_margin_pct
+    }
 
 RETURN_ON_INVESTMENT_CAPITAL_THRESHOLDS = [
     (3, 20),    
