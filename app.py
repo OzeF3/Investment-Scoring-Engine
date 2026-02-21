@@ -2,9 +2,7 @@ from core_engine import calculate_all_scores
 from core_engine import Fundamental_input, Valuation_input, Moat_input
 
 from company_provider import fetch_company_metadata, DataFetchError
-from fundamental_provider import fetch_fundamental_data
-from valuation_provider import fetch_stock_valuation_data
-from valuation_provider import fetch_sector_valuation_data
+from run_analysis import complete_dict_of_data
 
 data = None
 ticker = None
@@ -45,31 +43,26 @@ while True:
         else:
             print("Sector: Not available")
 
-        #getting fundamental data for ticker:
-        fundamental_data = fetch_fundamental_data(user_ticker)
+        #getting fundamental and valuation data for ticker:
+        all_data = complete_dict_of_data(ticker, sector)
 
-        revenue_growth_pct = fundamental_data["revenue_growth_pct"]
-        operating_margin_pct = fundamental_data["operating_margin_pct"]
-        debt_to_equity_ratio = fundamental_data["debt_to_equity_ratio"]
-        free_cash_flow_margin_pct = fundamental_data["free_cash_flow_margin_pct"]
+        revenue_growth_pct = all_data["fundamental"]["revenue_growth_pct"]
+        operating_margin_pct = all_data["fundamental"]["operating_margin_pct"]
+        debt_to_equity_ratio = all_data["fundamental"]["debt_to_equity_ratio"]
+        free_cash_flow_margin_pct = all_data["fundamental"]["free_cash_flow_margin_pct"]
 
-        #getting STOCK valuation data for ticker:
-        stock_valuation_data = fetch_stock_valuation_data(user_ticker)
+        #consider name changing
+        stock_pe = all_data["valuation_stock"]["pe"]
+        stock_forward_pe = all_data["valuation_stock"]["forwardpe"]
+        stock_ev_ebitda_multipe = all_data["valuation_stock"]["evebitdamultiple"]
+        stock_price_to_sales_multiple = all_data["valuation_stock"]["pricetosalesmultiple"]
+        stock_price_to_free_cash_flow_multiple = all_data["valuation_stock"]["pricetofreecashflowmultiple"]
 
-        stock_pe = stock_valuation_data["pe"]
-        stock_forward_pe = stock_valuation_data["forwardpe"]
-        stock_ev_ebitda_multipe = stock_valuation_data["evebitdamultiple"]
-        stock_price_to_sales_multiple = stock_valuation_data["pricetosalesmultiple"]
-        stock_price_to_free_cash_flow_multiple = stock_valuation_data["pricetofreecashflowmultiple"]
-
-        #getting SECTOR valuation data for ticker:
-        sector_valuation_data = fetch_sector_valuation_data(sector)
-
-        sector_median_pe = sector_valuation_data["sector_median_pe"]
-        sector_median_forward_pe = sector_valuation_data["sector_median_forward_pe"]
-        sector_median_ev_ebitda_multiple = sector_valuation_data["sector_median_ev_ebitda_multiple"]
-        sector_median_price_to_sales_multiple = sector_valuation_data["sector_median_price_to_sales_multiple"]
-        sector_median_price_to_fcf = sector_valuation_data["sector_median_price_to_fcf"]
+        sector_median_pe = all_data["valuation_sector"]["sector_median_pe"]
+        sector_median_forward_pe = all_data["valuation_sector"]["sector_median_forward_pe"]
+        sector_median_ev_ebitda_multiple = all_data["valuation_sector"]["sector_median_ev_ebitda_multiple"]
+        sector_median_price_to_sales_multiple = all_data["valuation_sector"]["sector_median_price_to_sales_multiple"]
+        sector_median_price_to_fcf = all_data["valuation_sector"]["sector_median_price_to_fcf"]
 
         break
 

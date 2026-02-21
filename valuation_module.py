@@ -5,6 +5,7 @@ import json
 import os
 import pandas as pd
 import statistics
+from api_caller import create_financial_file_2
 
 PE_INVALID = float('nan')
 PE_THRESHOLDS = [
@@ -97,6 +98,7 @@ def fetch_valuation_data_from_api(ticker) -> dict:
     stock_free_cash_flow = file_2["financialData"]["freeCashflow"]
     stock_price_to_free_cash_flow_multiple = stock_market_cap / stock_free_cash_flow
 
+    #consider name changing
     return {
         "pe": stock_pe,
         "forwardpe": stock_forward_pe,
@@ -104,7 +106,6 @@ def fetch_valuation_data_from_api(ticker) -> dict:
         "pricetosalesmultiple": stock_price_to_sales_multiple,
         "pricetofreecashflowmultiple": stock_price_to_free_cash_flow_multiple
     }
-
 
 def calculate_sector_median(sector_metrics: dict, metric_name: str):
     values = [
@@ -114,7 +115,7 @@ def calculate_sector_median(sector_metrics: dict, metric_name: str):
     ]
     return statistics.median(values)
 
-def fetch_sector_valuation_data(sector: str,):
+def fetch_sector_valuation_data(sector: str):
 
     #creating dict which connecting SECTOR NAME to SECTOR FILE NAME
     SECTOR_FILE_MAP = {
@@ -153,11 +154,13 @@ def fetch_sector_valuation_data(sector: str,):
     sector_metrics = {}
     for ticker in tickers:
         try:
+            create_financial_file_2(ticker)
             metrics = fetch_valuation_data_from_api(ticker)  
             sector_metrics[ticker] = metrics
         except Exception as e:
             print(f"Failed to fetch data for {ticker}: {e}")
 
+    #consider name changing
     sector_median_pe = calculate_sector_median(sector_metrics, "pe")
     sector_median_forward_pe = calculate_sector_median(sector_metrics, "forwardpe")
     sector_median_ev_ebitda_multiple = calculate_sector_median(sector_metrics, "evebitdamultiple")
