@@ -43,7 +43,6 @@ def fetch_valuation_data_from_api(ticker) -> dict:
     stock_free_cash_flow = file_2["financialData"]["freeCashflow"]
     stock_price_to_free_cash_flow_multiple = stock_market_cap / stock_free_cash_flow
 
-    #consider name changing
     return {
         "pe": stock_pe,
         "forward_pe": stock_forward_pe,
@@ -84,7 +83,7 @@ def fetch_sector_valuation_data(sector: str):
         "Healthcare": "holdings-daily-us-en-xlv.xlsx",
         "Consumer Cyclical": "holdings-daily-us-en-xly.xlsx",
     }
-
+    
     #using the dict to find the right file name
     file_name = SECTOR_FILE_MAP.get(sector)
 
@@ -101,7 +100,7 @@ def fetch_sector_valuation_data(sector: str):
     df = df_raw.iloc[1:].copy()
     df.columns = header
 
-    #number inside head() is how many stocks from etf will it valuate median from
+    #number in --head()-- is how many stocks from etf will it valuate median from
     tickers = df["Ticker"].astype(str).str.strip().head(3).tolist()
 
     sector_metrics = {}
@@ -113,7 +112,6 @@ def fetch_sector_valuation_data(sector: str):
         except Exception as e:
             print(f"Failed to fetch data for {ticker}: {e}")
 
-    #consider name changing
     sector_median_pe = calculate_sector_median(sector_metrics, "pe")
     sector_median_forward_pe = calculate_sector_median(sector_metrics, "forwardpe")
     sector_median_ev_ebitda_multiple = calculate_sector_median(sector_metrics, "evebitdamultiple")

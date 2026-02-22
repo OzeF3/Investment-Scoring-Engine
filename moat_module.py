@@ -120,9 +120,9 @@ def moat_weighted_score(
                         ) -> int:
     
     roic_weight = wbs['roic']
-    fcf_3y_g_weight = wbs['free_cash_flow_3y_g']
+    fcf_3y_g_weight = wbs['free_cash_flow_3y_cagr']
     gm_weight = wbs['gm_stability']
-    rnd_weight = wbs['rnd_to_rev']
+    rnd_weight = wbs['rnd_to_revenue']
 
     weighted_together = (roic_weight * roic + fcf_3y_g_weight * fcf_3y_g + gm_weight * gm + rnd_weight * rnd)
     return round(weighted_together)

@@ -12,6 +12,7 @@ stock_label = None
 print("Welcome to the Investment Scoring Engine")
 
 #loop that make sure its float and system wont crash( check weather i need it)
+#check if needed when connecting FLASK
 def get_float(prompt) -> float:
 
     while True:
@@ -51,7 +52,6 @@ while True:
         debt_to_equity_ratio = all_data["fundamental"]["debt_to_equity_ratio"]
         free_cash_flow_margin_pct = all_data["fundamental"]["free_cash_flow_margin_pct"]
 
-        #consider name changing
         stock_pe = all_data["valuation_stock"]["pe"]
         stock_forward_pe = all_data["valuation_stock"]["forward_pe"]
         stock_ev_ebitda_multipe = all_data["valuation_stock"]["ev_ebitda_multiple"]

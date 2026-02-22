@@ -13,14 +13,14 @@ def fetch_company_metadata(ticker: str) -> dict:
 
     #fetch from yahoo finance
     try:
-    # Silence noisy output that may be printed by yfinance/urllib
+    #Silence noisy output that may be printed by yfinance/urllib
     
         with contextlib.redirect_stdout(io.StringIO()), contextlib.redirect_stderr(io.StringIO()):
             t = yf.Ticker(clean_ticker)
             info = t.info
 
     except Exception:
-    # Raise a user-friendly error without leaking internal HTTP details
+    #Raise a user-friendly error without leaking internal HTTP details
         raise DataFetchError(f"Ticker {clean_ticker} not found") from None
     
     #Validate response is usable

@@ -16,6 +16,7 @@ def complete_dict_of_data(ticker,sector):
     valuation_metrics_dict_2 = fetch_sector_valuation_data(sector)
     moat_metrics_dict_3 = fetch_moat_data_from_api(ticker)
 
+    #creating 4 dicts
     return {
         "fundamental":fundamental_metrics_dict,
         "valuation_stock":valuation_metrics_dict_1, 

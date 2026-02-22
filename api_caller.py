@@ -35,7 +35,6 @@ def create_financial_file_2(ticker):
     """
     creating .json file_2 from API to be used for fetching financial data
     """    
-
     clean_ticker = ticker.strip().upper()
       
     #API Yahoo Finance Real Time/ stocks / get-summery
@@ -62,7 +61,6 @@ def create_financial_file_3(ticker):
     """
     creating .json file_3 from API to be used for fetching financial data
     """    
-     
     clean_ticker = ticker.strip().upper()
 
     #API YH FINANCE/ stocks / balance-sheet
