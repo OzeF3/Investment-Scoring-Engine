@@ -23,14 +23,6 @@ FCF_3Y_CAGR_THRESHOLDS = [
                             ]
 FCF_3Y_CAGR_DEFAULT = 98  
 
-GM_STABILITY_THRESHOLDS = [
-    (2, 90),    
-    (5, 80),    
-    (10, 60),   
-    (15, 40),   
-                            ]
-GM_STABILITY_DEFAULT = 25
-
 RND_TO_REVENUE_RATIO_THRESHOLDS = [
     (3, 25),     
     (7, 40),     
@@ -49,10 +41,6 @@ free_cash_flow_3y_cagr_scorer = ScoringMethods(
     FCF_3Y_CAGR_THRESHOLDS,
     FCF_3Y_CAGR_DEFAULT)
 
-gm_stability_scorer = ScoringMethods(
-    GM_STABILITY_THRESHOLDS,
-    GM_STABILITY_DEFAULT)
-
 rnd_revenue_scorer = ScoringMethods(
     RND_TO_REVENUE_RATIO_THRESHOLDS,
     RND_TO_REVENUE_RATIO_DEFAULT)
@@ -62,7 +50,6 @@ def fetch_moat_data_from_api(ticker) -> dict:
     opening .json file and fetching moat financial metrics:
     -retrun on investment capital
     -free cash flow 3 year cagr
-    -gross margin stability
     -r&d to revenue 
         
     """
@@ -129,20 +116,14 @@ def fetch_moat_data_from_api(ticker) -> dict:
         if free_cash_flow_3_years_ago != 0:
             free_cash_flow_3y_cagr = (free_cash_flow_latest / free_cash_flow_3_years_ago) ** (1/3) - 1
 
-    #GROSS MARGIN STABILITY: get from API
-
-    #just for testing the system
-    gross_margin_stability = free_cash_flow_3y_cagr
-
-
     #R&D TO REVENUE RATIO: get from API(using proxy)
     #R&D to Revenue = R&D Expense / Total Revenue
     #REVENUE from roic calculation:
     #list of quarters
     quarters = file_5['data']['income_statement']
     #yearly total
-    total_revenue = sum(q['revenue'] for q in quarters)
-    total_operating_expenses = sum(q['operating_expense'] for q in quarters)
+    total_revenue = sum(float(q['revenue']) for q in quarters)
+    total_operating_expenses = sum(float(q['operating_expense']) for q in quarters)
     #proxy(instead of pure R&D metric)
     RND_ESTIMATED_PERCENT = 0.2
     estimated_rnd = total_operating_expenses * RND_ESTIMATED_PERCENT
@@ -151,30 +132,26 @@ def fetch_moat_data_from_api(ticker) -> dict:
     return {
         "return_on_investment_capital": return_on_investment_capital,
         "free_cash_flow_3y_cagr": free_cash_flow_3y_cagr,
-        "gross_margin_stability": gross_margin_stability,
         "r_and_d_to_revenue": r_and_d_to_revenue
         }
 
 def moat_weighted_score(
     roic: int,
     fcf_3y_cagr: int,
-    gm: int,
     rnd: int,
     wbs: dict
                         ) -> int:
     
     roic_weight = wbs['roic']
     fcf_3y_cagr_weight = wbs['free_cash_flow_3y_cagr']
-    gm_weight = wbs['gm_stability']
     rnd_weight = wbs['rnd_to_revenue']
 
-    weighted_together = (roic_weight * roic + fcf_3y_cagr_weight * fcf_3y_cagr + gm_weight * gm + rnd_weight * rnd)
+    weighted_together = (roic_weight * roic + fcf_3y_cagr_weight * fcf_3y_cagr + rnd_weight * rnd)
     return round(weighted_together)
 
 def calculate_moat_scores(
     return_on_investment_capital: float,
     free_cash_flow_3y_cagr: float,
-    gross_margin_list: list,
     r_and_d_to_revenue: float,
     sector_name: str
                         ) -> dict:   
@@ -187,21 +164,17 @@ def calculate_moat_scores(
     return_on_investment_capital = roic_scorer.threshold_based_score(return_on_investment_capital)
     free_cash_flow_3y_cagr = free_cash_flow_3y_cagr_scorer.threshold_based_score(free_cash_flow_3y_cagr)
 
-    gm_range = max(gross_margin_list) - min(gross_margin_list)
-    gm_stability = gm_stability_scorer.threshold_based_score(gm_range)
-
     r_and_d_to_revenue = rnd_revenue_scorer.threshold_based_score(r_and_d_to_revenue)
 
     weight_by_sector = moat_weight(sector_name)
     
     final_score = moat_weighted_score(
-    return_on_investment_capital, free_cash_flow_3y_cagr, gm_stability, r_and_d_to_revenue, weight_by_sector)
+    return_on_investment_capital, free_cash_flow_3y_cagr, r_and_d_to_revenue, weight_by_sector)
 
     #change names
     return {
         "roic_score": return_on_investment_capital,
         "fcf_3y_cagr_score": free_cash_flow_3y_cagr,
-        "gm_stability_score": gm_stability,
         "r_and_d_to_revenue_score": r_and_d_to_revenue,
         "weight_currently_being_used": weight_by_sector,
         "moat_score": final_score

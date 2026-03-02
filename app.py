@@ -105,20 +105,13 @@ while True:
                                 )
 
         print("\n--- Moat Metrics ---")
-        print("Enter Gross Margin % for the last 5 years:")
-        gm1 = ("Year 1 Gross Margin %: ")
-        gm2 = ("Year 2 Gross Margin %: ")
-        gm3 = ("Year 3 Gross Margin %: ")
-        gm4 = ("Year 4 Gross Margin %: ")
-        gm5 = ("Year 5 Gross Margin %: ")
-        gross_margin_list = [gm1, gm2, gm3, gm4, gm5]
-
-        revenue_growth_raw = ("Enter total revenue_growth (same units as R&D): ")
-
+        print(f"Return_on_investment_capital: {return_on_investment_capital:.2f}")
+        print(f"Free_cash_flow_3y_cagr: {free_cash_flow_3y_cagr:.2f}")
+        print(f"r_and_d_to_revenue: {r_and_d_to_revenue:.2f}")
+        
         moat_input = Moat_input(
             return_on_investment_capital=return_on_investment_capital,
             free_cash_flow_3y_cagr=free_cash_flow_3y_cagr,
-            gross_margin_list=gross_margin_list,
             r_and_d_to_revenue=r_and_d_to_revenue,
             sector=sector
                         )

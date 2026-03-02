@@ -14,56 +14,46 @@ PE_INVALID = float('nan')
 PE_THRESHOLDS = [
     (0.6,95),
     (0.85,80),
-    (1.15,50),
-    (1.5,30),
+    (1.5,45),
     (2.0,15),
                     ]
-PE_DEFAULT = 0
+PE_DEFAULT = 10
 
 FORWARD_PE_INVALID = float('nan')
 FORWARD_PE_THRESHOLDS = [
-    (0.60,95),
-    (0.80,90),
-    (0.90,75),
-    (1.10,55),
-    (1.30,40),
-    (1.60,25),
-    (2.00,15),
+    (0.60,90),
+    (0.90,65),
+    (1.10,35),
+    (2.00,10),
             ]
-FORWARD_PE_DEFAULT = 5
+FORWARD_PE_DEFAULT = 2.5
 
 EV_EBITDA_INVALID = float('nan')
 EV_EBITDA_THRESHOLDS = [
-    (0.70, 95),   
-    (0.90, 85),   
-    (1.10, 60),   
-    (1.40, 40),   
-    (2.00, 25),  
-    (3.00, 15),   
+    (0.70, 95),     
+    (1.10, 60),     
+    (2.00, 28),  
+    (3.00, 10),   
                             ]
-EV_EBITDA_DEFAULT = 5 
+EV_EBITDA_DEFAULT = 7 
 
 PS_INVALID = float('nan')
 PS_THRESHOLDS = [
-    (0.70, 95), 
-    (0.90, 85),    
-    (1.10, 60),   
-    (1.40, 40),   
-    (2.00, 25),   
-    (3.00, 15),  
+    (0.70, 95),    
+    (1.10, 50),     
+    (2.00, 20),   
+    (3.00, 10),  
                     ]
-PS_DEFAULT = 5     
+PS_DEFAULT = 5.5     
 
 P_FCF_INVALID = float('nan')
 P_FCF_THRESHOLDS = [
-    (0.70, 95),   
-    (0.90, 85),  
-    (1.10, 60),   
-    (1.40, 40),   
-    (2.00, 25),   
-    (3.00, 15), 
+    (0.70, 90),    
+    (1.10, 75),      
+    (2.00, 35),   
+    (3.00, 20), 
                         ]
-P_FCF_DEFAULT = 5  
+P_FCF_DEFAULT = 4.5  
 
 #creating objects so i can use them as objects in this file
 pe_scorer = ScoringMethods(
@@ -179,7 +169,7 @@ def fetch_sector_valuation_data(sector: str):
     df.columns = header
 
     #number in --head()-- is how many stocks from etf will it valuate median from
-    tickers = df["Ticker"].astype(str).str.strip().head(3).tolist()
+    tickers = df["Ticker"].astype(str).str.strip().head(5).tolist()
 
     sector_metrics = {}
     for ticker in tickers:
