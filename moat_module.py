@@ -63,7 +63,7 @@ def fetch_moat_data_from_api(ticker) -> dict:
     -retrun on investment capital
     -free cash flow 3 year cagr
     -gross margin stability
-    -r&d to revenue ratio
+    -r&d to revenue 
         
     """
     clean_ticker = ticker.strip().upper()
@@ -79,6 +79,10 @@ def fetch_moat_data_from_api(ticker) -> dict:
     file_path_4= f"data_reports/json_file_4_{clean_ticker}.json"
     with open(file_path_4, "r", encoding="utf-8") as f:
             file_4 = json.load(f)
+
+    file_path_5= f"data_reports/json_file_5_{clean_ticker}.json"
+    with open(file_path_5, "r", encoding="utf-8") as f:
+            file_5 = json.load(f)
 
     #ROIC:
 
@@ -131,14 +135,19 @@ def fetch_moat_data_from_api(ticker) -> dict:
     gross_margin_stability = free_cash_flow_3y_cagr
 
 
-    #R&D TO REVENUE RATIO: get from API
+    #R&D TO REVENUE RATIO: get from API(using proxy)
     #R&D to Revenue = R&D Expense / Total Revenue
     #REVENUE from roic calculation:
+    #list of quarters
+    quarters = file_5['data']['income_statement']
+    #yearly total
+    total_revenue = sum(q['revenue'] for q in quarters)
+    total_operating_expenses = sum(q['operating_expense'] for q in quarters)
+    #proxy(instead of pure R&D metric)
+    RND_ESTIMATED_PERCENT = 0.2
+    estimated_rnd = total_operating_expenses * RND_ESTIMATED_PERCENT
+    r_and_d_to_revenue = (estimated_rnd / total_revenue) * 100
     
-    
-    #just for testing the system
-    r_and_d_to_revenue = free_cash_flow_3y_cagr
-
     return {
         "return_on_investment_capital": return_on_investment_capital,
         "free_cash_flow_3y_cagr": free_cash_flow_3y_cagr,
@@ -166,8 +175,7 @@ def calculate_moat_scores(
     return_on_investment_capital: float,
     free_cash_flow_3y_cagr: float,
     gross_margin_list: list,
-    r_and_d_raw: float,
-    revenue_growth_raw:float,
+    r_and_d_to_revenue: float,
     sector_name: str
                         ) -> dict:   
     """
@@ -182,13 +190,12 @@ def calculate_moat_scores(
     gm_range = max(gross_margin_list) - min(gross_margin_list)
     gm_stability = gm_stability_scorer.threshold_based_score(gm_range)
 
-    r_and_d = r_and_d_raw/revenue_growth_raw * 100
-    r_and_d_to_revenue = rnd_revenue_scorer.threshold_based_score(r_and_d)
+    r_and_d_to_revenue = rnd_revenue_scorer.threshold_based_score(r_and_d_to_revenue)
 
     weight_by_sector = moat_weight(sector_name)
     
     final_score = moat_weighted_score(
-    return_on_investment_capital, free_cash_flow_3y_cagr, gm_stability, r_and_d, weight_by_sector)
+    return_on_investment_capital, free_cash_flow_3y_cagr, gm_stability, r_and_d_to_revenue, weight_by_sector)
 
     #change names
     return {

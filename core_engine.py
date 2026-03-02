@@ -31,8 +31,7 @@ class Moat_input:
     return_on_investment_capital: float
     free_cash_flow_3y_cagr: float
     gross_margin_list: list[float]
-    r_and_d_raw: float
-    revenue_growth_raw: float
+    r_and_d_to_revenue: float
     sector: str
         
 def calculate_all_scores(
@@ -82,16 +81,14 @@ def calculate_all_scores(
     return_on_investment_capital= moat_input.return_on_investment_capital
     free_cash_flow_3y_cagr = moat_input.free_cash_flow_3y_cagr
     gross_margin_list = moat_input.gross_margin_list
-    r_and_d_raw = moat_input.r_and_d_raw
-    revenue_growth_raw = moat_input.revenue_growth_raw
+    r_and_d_to_revenue = moat_input.r_and_d_to_revenue
     m_sector_name = moat_input.sector
 
     moat_scores = calculate_moat_scores(
         return_on_investment_capital = return_on_investment_capital,
         free_cash_flow_3y_cagr = free_cash_flow_3y_cagr,
         gross_margin_list = gross_margin_list,
-        r_and_d_raw = r_and_d_raw,
-        revenue_growth_raw = revenue_growth_raw,
+        r_and_d_to_revenue = r_and_d_to_revenue,
         sector_name = m_sector_name)
     
     # Extracting final scores from each module

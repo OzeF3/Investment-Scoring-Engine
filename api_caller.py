@@ -22,7 +22,6 @@ def create_financial_file_1(ticker):
     """    
     clean_ticker = ticker.strip().upper()
 
-    #API Yfinance / stocks / financialData 
     url = "https://yahoo-finance166.p.rapidapi.com/api/stock/get-financial-data"
 
     querystring = {"region":"US","symbol":clean_ticker}
@@ -41,7 +40,6 @@ def create_financial_file_2(ticker):
     """    
     clean_ticker = ticker.strip().upper()
       
-    #API Yahoo Finance Real Time/ stocks / get-summery
     url = "https://yahoo-finance-real-time1.p.rapidapi.com/stock/get-summary"
 
     querystring = {"lang":"en-US","symbol":clean_ticker,"region":"US"}
@@ -60,7 +58,6 @@ def create_financial_file_3(ticker):
     """    
     clean_ticker = ticker.strip().upper()
 
-    #API YH FINANCE/ stocks / balance-sheet
     url = "https://yahoo-finance15.p.rapidapi.com/api/v1/markets/stock/modules"
 
     querystring = {"ticker":clean_ticker,"module":"balance-sheet-v2"}
@@ -79,7 +76,6 @@ def create_financial_file_4(ticker):
     """    
     clean_ticker = ticker.strip().upper()
 
-    #API Yahoo Finance Real Time/ stocks / get-cashflow
     url = "https://yahoo-finance-real-time1.p.rapidapi.com/stock/get-cashflow"
 
     querystring = {"region":"US","lang":"en-US","symbol":clean_ticker}
@@ -91,6 +87,26 @@ def create_financial_file_4(ticker):
 
     file_path_4 = f"data_reports/json_file_4_{clean_ticker}.json"
     save_api_response(url, headers, querystring, file_path_4)
+
+def create_financial_file_5(ticker):
+    """
+    creating .json file_5 from API to be used for fetching financial data
+    """    
+    clean_ticker = ticker.strip().upper()
+
+    url = "https://real-time-finance-data.p.rapidapi.com/company-income-statement"
+
+    querystring = {"symbol":clean_ticker,"period":"QUARTERLY","language":"en"}
+
+    headers = {
+	"x-rapidapi-key":os.getenv("API_MOAT_THREE"),
+	"x-rapidapi-host": "real-time-finance-data.p.rapidapi.com"
+    }
+
+    file_path_5 = f"data_reports/json_file_5_{clean_ticker}.json"
+    save_api_response(url, headers, querystring, file_path_5)
+
+
     
 
 

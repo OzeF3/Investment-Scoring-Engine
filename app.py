@@ -59,6 +59,8 @@ while True:
 
         return_on_investment_capital= all_data["moat"]["return_on_investment_capital"]
         free_cash_flow_3y_cagr = all_data["moat"]["free_cash_flow_3y_cagr"]
+        #gm stability missing
+        r_and_d_to_revenue = all_data["moat"]["r_and_d_to_revenue"]
 
         print("\n--- Fundamental Metrics ---")
         print(f"Quarterly revenue_growth Growth (YoY): {revenue_growth_pct:.2f}%")
@@ -111,15 +113,13 @@ while True:
         gm5 = ("Year 5 Gross Margin %: ")
         gross_margin_list = [gm1, gm2, gm3, gm4, gm5]
 
-        r_and_d_raw = ("Enter total R&D (same units as revenue_growth): ")
         revenue_growth_raw = ("Enter total revenue_growth (same units as R&D): ")
 
         moat_input = Moat_input(
             return_on_investment_capital=return_on_investment_capital,
             free_cash_flow_3y_cagr=free_cash_flow_3y_cagr,
             gross_margin_list=gross_margin_list,
-            r_and_d_raw=r_and_d_raw,
-            revenue_growth_raw=revenue_growth_raw,
+            r_and_d_to_revenue=r_and_d_to_revenue,
             sector=sector
                         )
         
