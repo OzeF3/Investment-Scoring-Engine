@@ -52,7 +52,8 @@ const Index = () => {
     try {
       const res = await fetch(`${API_URL}/analyze?ticker=${trimmed}`);
       if (res.status === 404) {
-        setError(`Ticker "${trimmed}" not found. Please check and try again.`);
+        const json = await res.json();
+        setError(json.error);
         return;
       }
       if (!res.ok) {
