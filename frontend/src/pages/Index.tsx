@@ -74,7 +74,7 @@ const Index = () => {
       <header className="border-b border-border">
         <div className="max-w-5xl mx-auto px-4 py-4 flex items-center gap-3">
           <TrendingUp className="h-5 w-5 text-primary" />
-          <span className="font-semibold text-foreground tracking-tight">StockScope</span>
+          <span className="font-semibold text-foreground tracking-tight">E-finance</span>
           <span className="text-xs text-muted-foreground ml-1">Investment Analyzer</span>
         </div>
       </header>
