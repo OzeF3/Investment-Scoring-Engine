@@ -33,7 +33,7 @@ interface AnalysisData {
   };
 }
 
-const API_URL = "http://localhost:5000";
+const API_URL = "https://investment-scoring-engine.onrender.com";
 
 const Index = () => {
   const [ticker, setTicker] = useState("");
