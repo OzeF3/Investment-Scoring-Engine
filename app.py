@@ -70,7 +70,7 @@ def analyze():
         }), 200
     
     except DataFetchError as e:
-    return jsonify({"error": f"DataFetchError: {str(e)}"}), 404
+        return jsonify({"error": f"DataFetchError: {str(e)}"}), 404
 
     except Exception as e:
         return jsonify({"error": str(e)}), 500
