@@ -2,12 +2,38 @@ import requests
 import json
 from dotenv import load_dotenv
 import os
+import time
+import functools
 
 load_dotenv()
 
+def retry(times=3, delay=1, exceptions=(Exception,)):
+#function that create the decorator
+    def decorator(func):
+    #the acthual decorator, it receivce the function im decorating('save_api_response')
+        @functools.wraps(func)
+        #"the wrapper function I'm about to define should pretend to be func."
+        def wrapper(*args, **kwargs):
+        #the function that will WRAP 'save_api_response'(like a security guard at a door)
+            last_exception = None
+            for attempt in range(1, times + 1):
+                try:
+                    return func(*args, **kwargs)
+                except exceptions as e:
+                    last_exception = e
+                    print(f"[retry] attempt {attempt}/{times} failed: {e}")
+                    if attempt < times:
+                        time.sleep(delay)
+            raise last_exception
+        return wrapper
+    return decorator
+
+@retry(times=3, delay=1)
+#equivalent of writing -> save_api_response = retry(times=3, delay=1)(save_api_response)
 def save_api_response(url, headers, params, file_path):
 
-    response = requests.get(url, headers=headers, params=params)
+    response = requests.get(url, headers=headers, params=params, timeout=10)
+    response.raise_for_status()
     data = response.json()
 
     os.makedirs("data_reports", exist_ok=True)
