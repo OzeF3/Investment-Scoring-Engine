@@ -12,6 +12,12 @@ app = Flask(__name__)
 CORS(app)
 #tells the browser to allow internal sites to send requests to this server
 
+#It responds instantly to Render's "are you alive?" check so Render doesn't kill your server
+#while it's waiting for a real request to finish.
+@app.route("/health", methods=["GET"])
+def health():
+    return jsonify({"status": "ok"}), 200
+
 @app.route("/analyze", methods=["GET"])
 #when someone enter this address, loat this GET request with the function underneeth me
 def analyze():
@@ -75,4 +81,4 @@ def analyze():
         return jsonify({"error": str(e), "trace": traceback.format_exc()}), 500
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(host="0.0.0.0", port=10000, debug=False)
